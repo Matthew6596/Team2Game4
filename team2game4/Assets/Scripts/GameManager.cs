@@ -2,9 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using JetBrains.Annotations; //why isn't this being used :(
 
 public class GameManager : MonoBehaviour
 {
+    public static GameObject Instance;
+    public static GameManager gm;
+    private void Awake()
+    {
+        Instance = gameObject;
+        gm = this;
+    }
+
+    [Header("Player Movement")]
+    public GameObject target;
+
+    [Space]
+    [Header("Pillars")]
+    public GameObject currPillar;
+    public GameObject nextPillar;
+    public GameObject nextOpening;
+
+    [Space]
+    [Header("Slime Stuff")]
+    //Slime Stuff
     public GameObject mainSlime;
     public Button idleBut, walkBut,jumpBut,attackBut,damageBut0,damageBut1,damageBut2;
     public Camera cam;
