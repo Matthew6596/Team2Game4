@@ -16,6 +16,8 @@ public class PillarSpawn : MonoBehaviour
 
     public List<GameObject> Pillars = new();
 
+    public GameObject player;
+
     [NonSerialized]
     public bool pillarMoving=false;
 
@@ -23,6 +25,11 @@ public class PillarSpawn : MonoBehaviour
     {
         instance = this;
         StartPillars();
+
+        if (player == null)
+        {
+            player = new GameObject("missingPlayerReferenceIn_PillarSpawn");
+        }
     }
 
     public void StartPillars()
@@ -30,8 +37,10 @@ public class PillarSpawn : MonoBehaviour
         Pillars.Clear();
         SpawnNewPillar();
         SpawnNewPillar();
-        Pillars[0].transform.position = transform.position+(2 * horizontalSpacing * Vector3.left);
-        Pillars[1].transform.position = transform.position+(horizontalSpacing * Vector3.left);
+        SpawnNewPillar();
+        Pillars[0].transform.position = transform.position + (3 * horizontalSpacing * Vector3.left);
+        Pillars[1].transform.position = transform.position+(2 * horizontalSpacing * Vector3.left);
+        Pillars[2].transform.position = transform.position+(horizontalSpacing * Vector3.left);
     }
 
     public void SpawnNewPillar()
@@ -83,28 +92,58 @@ public class PillarSpawn : MonoBehaviour
     {
         SpawnNewPillar();
 
-        //Disable player control
+        AimingScript.instance.gameObject.SetActive(false);
+        //Disable player control << to do
         if (!pillarMoving)
         {
-            StartCoroutine(movePillars());
-            pillarMoving = true;
+            //Making sure each pillar ends in *exact* correct position
+            float[] endPositions = new float[Pillars.Count+1];
+            for (int i = 0; i < Pillars.Count; i++) endPositions[i] = Pillars[i].transform.position.x - horizontalSpacing;
+            endPositions[Pillars.Count] = player.transform.position.x - horizontalSpacing;
+
+            //Move Pillars
+            //and player
+            Pillars.Add(player);
+            StartCoroutine(movePillars(Pillars.ToArray(),endPositions));
+            Pillars.Remove(player);
+
+            pillarMoving = true; //set bool to prevent spam
         }
-        pillarMoving = false;
-        //Enable player control
     }
 
-    IEnumerator movePillars()
+    IEnumerator movePillars(GameObject[] movingObjs,float[] endPos)
     {
+        //Move all pillars
         float pos = 0;
         while (pos < horizontalSpacing)
         {
-            foreach(GameObject p in Pillars)
+            foreach(GameObject p in movingObjs)
             {
                 p.transform.Translate(moveSpeed * Time.deltaTime * Vector3.left);
             }
             pos += moveSpeed * Time.deltaTime;
             yield return null;
         }
+        //When movement done, set pillars to exact end position
+        for (int i = 0; i < movingObjs.Length; i++)
+        {
+            Vector3 p = movingObjs[i].transform.position;
+            movingObjs[i].transform.position = new Vector3(endPos[i], p.y, p.z);
+        }
+
+        //Extra stuff to do when pillars done moving
+        pillarMoving = false;
+        PillarsDoneMoving();
+    }
+
+    public void PillarsDoneMoving()
+    {
+        AimingScript aim = AimingScript.instance;
+        aim.gameObject.SetActive(true);
+        aim.UpdateMinMaxAngles();
+        aim.SetRotation(0);
+
+        //enable player control << to do
     }
 
 }
