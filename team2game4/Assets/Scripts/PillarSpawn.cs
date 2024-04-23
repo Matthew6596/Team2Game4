@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PillarSpawn : MonoBehaviour
 {
+    public static PillarSpawn instance;
+
     public GameObject pillarBlock;
 
     public int minGapSize, maxGapSize;
@@ -19,6 +21,7 @@ public class PillarSpawn : MonoBehaviour
 
     private void Start()
     {
+        instance = this;
         StartPillars();
     }
 
