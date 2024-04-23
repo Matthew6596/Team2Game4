@@ -19,7 +19,6 @@ public class AimingScript : MonoBehaviour
     bool swapMinMax = false;
 
     Transform lineSpriteObj;
-    bool goingUp = true;
 
     // Start is called before the first frame update
     void Start()
