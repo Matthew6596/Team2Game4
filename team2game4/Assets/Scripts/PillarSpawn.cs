@@ -18,6 +18,8 @@ public class PillarSpawn : MonoBehaviour
     public List<GameObject> Pillars = new();
 
     public GameObject player;
+    [NonSerialized]
+    public PlayerMovement playerControl;
 
     [NonSerialized]
     public bool pillarMoving=false;
@@ -30,6 +32,10 @@ public class PillarSpawn : MonoBehaviour
         if (player == null)
         {
             player = new GameObject("missingPlayerReferenceIn_PillarSpawn");
+        }
+        else
+        {
+            playerControl = player.GetComponent<PlayerMovement>();
         }
     }
 
@@ -94,8 +100,11 @@ public class PillarSpawn : MonoBehaviour
     {
         SpawnNewPillar();
 
+        removePillarFruit();
         AimingScript.instance.gameObject.SetActive(false);
         //Disable player control << to do
+        playerControl.enabled = false;
+
         if (!pillarMoving)
         {
             //Making sure each pillar ends in *exact* correct position
@@ -146,6 +155,31 @@ public class PillarSpawn : MonoBehaviour
         aim.SetRotation(0);
 
         //enable player control << to do
+        playerControl.enabled = true;
+    }
+
+    public Transform pillarPlayerOn()
+    {
+        foreach(GameObject p in Pillars)
+        {
+            if (p.transform.childCount > 8) return p.transform;
+        }
+        return null;
+    }
+    public void removePillarFruit()
+    {
+        Transform p = pillarPlayerOn();
+        Debug.Log(p);
+        if(p!=null)
+            for(int i=p.childCount+1; i>=0; i--)
+            {
+                GameObject c = p.GetChild(0).gameObject;
+                if (c.CompareTag("SafeZone")) //<<Dont work :(
+                {
+                    //make particle here maybe
+                    Destroy(c);
+                }
+            }
     }
 
 }

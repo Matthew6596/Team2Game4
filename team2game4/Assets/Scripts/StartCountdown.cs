@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class StartCountdown : MonoBehaviour
 {
-    public GameObject player;
+    PlayerMovement playerControl;
 
     TMP_Text countdownTxt;
     int cnt = 3;
@@ -13,6 +13,8 @@ public class StartCountdown : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerControl = PillarSpawn.instance.playerControl;
+        playerControl.enabled = false;
         countdownTxt = GetComponent<TMP_Text>();
         StartCoroutine(countDown());
     }
@@ -30,6 +32,7 @@ public class StartCountdown : MonoBehaviour
     void EndCountdown()
     {
         //enable player input
+        playerControl.enabled = true;
         //start hunger
 
         //hide countdown text
