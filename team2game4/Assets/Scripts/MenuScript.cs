@@ -50,4 +50,13 @@ public class MenuScript : MonoBehaviour
         //play hover sfx
         src.PlayOneShot(btnHoverSfx);
     }
+
+    public void OpenPopup(GameObject _group)
+    {
+        _group.SetActive(true);
+    }
+    public void ClosePopup(GameObject _group)
+    {
+        _group.SetActive(false);
+    }
 }
