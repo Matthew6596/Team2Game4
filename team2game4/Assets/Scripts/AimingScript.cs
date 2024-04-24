@@ -64,7 +64,7 @@ public class AimingScript : MonoBehaviour
         }
 
         //Move target
-        target.position = new Vector3(player.position.x+4, Mathf.Tan(transform.rotation.eulerAngles.z*Mathf.Deg2Rad)*4,0);
+        target.position = new Vector3(player.position.x+4, Mathf.Tan(transform.rotation.eulerAngles.z*Mathf.Deg2Rad) *4+player.position.y,0);
     }
 
     void TurnAround()
