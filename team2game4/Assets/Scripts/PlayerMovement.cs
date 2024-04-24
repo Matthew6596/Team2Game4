@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     {   if(ctx.performed)
         {
             Debug.Log("click");
+            //gm.ChangeStateTo(SlimeAnimationState.Jump);
             Vector3 targetPos;
             
             if (gm.targetCollidingObj == gm.nextPillar)
@@ -31,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
                 Debug.Log("pillarzone");
                 targetPos =  new Vector3(gm.nextPillar.transform.position.x - 1, gm.nextPillar.transform.position.y, 0);
                 gameObject.transform.position = targetPos;
+                StartCoroutine("GameOver");
 
             }
             else if (gm.targetCollidingObj == gm.nextOpening)
@@ -40,5 +42,11 @@ public class PlayerMovement : MonoBehaviour
                 gameObject.transform.position = targetPos;
             }
         }
+    }
+
+    IEnumerator GameOver()
+    {
+        yield return new WaitForSeconds(2);
+        gm.menuScript.ChangeScene("GameOver");
     }
 }

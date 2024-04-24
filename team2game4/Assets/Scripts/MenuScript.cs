@@ -8,9 +8,13 @@ public class MenuScript : MonoBehaviour
 {
     public AudioClip btnHoverSfx,btnClickSfx;
     AudioSource src;
+
+    GameManager gm;
     private void Start()
     {
         src = GetComponent<AudioSource>();
+        gm = GameManager.gm;
+        gm.menuScript = this;
     }
 
 
