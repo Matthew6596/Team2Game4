@@ -22,18 +22,21 @@ public class MenuScript : MonoBehaviour
     public static void changeScene(string name)
     {
         prevScene = SceneManager.GetActiveScene().name;
+        GameManager.gm.stomachMeter = 50;
         SceneManager.LoadScene(name);
     }
     public void ChangeScene(string name)
     {
         //src.PlayOneShot(btnClickSfx);
         prevScene = SceneManager.GetActiveScene().name;
+        gm.stomachMeter = 50;
         SceneManager.LoadScene(name); 
     }
     public void ChangeScene(int index)
     {
         //src.PlayOneShot(btnClickSfx);
         prevScene = SceneManager.GetActiveScene().name;
+        gm.stomachMeter = 50;
         SceneManager.LoadScene(index); 
     }
 

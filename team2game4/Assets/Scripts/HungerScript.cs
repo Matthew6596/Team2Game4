@@ -10,6 +10,7 @@ public class HungerScript : MonoBehaviour
     TMP_Text percent;
 
     public float depleteRate = 2.0f;
+    public int increaseAmount = 5;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +34,10 @@ public class HungerScript : MonoBehaviour
         {
             gm.stomachMeter--;
         }
+        else if(gm.stomachMeter >= 100)
+        {
+            gm.stomachMeter = 100;
+        }
         else
         {
             gm.stomachMeter = 0;
@@ -42,12 +47,12 @@ public class HungerScript : MonoBehaviour
 
     public void Increase()
     {
-        if(gm.stomachMeter < 100 && gm.stomachMeter <= 98)
+        if(gm.stomachMeter < 100 && gm.stomachMeter <= 100 - increaseAmount)
         {
-            gm.stomachMeter = gm.stomachMeter + 2;
+            gm.stomachMeter = gm.stomachMeter + increaseAmount;
             percent.color = Color.green;
         }
-        else if (gm.stomachMeter < 100 && gm.stomachMeter > 98)
+        else if (gm.stomachMeter < 100 && gm.stomachMeter > 100 - increaseAmount)
         {
             gm.stomachMeter = 100;
             percent.color = Color.green;

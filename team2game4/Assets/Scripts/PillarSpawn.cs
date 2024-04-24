@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 
 public class PillarSpawn : MonoBehaviour
 {
+    GameManager gm;
+
     public static PillarSpawn instance;
 
     public GameObject pillarBlock;
@@ -27,6 +29,8 @@ public class PillarSpawn : MonoBehaviour
 
     private void Start()
     {
+        gm = GameManager.gm;
+
         instance = this;
         StartPillars();
 
@@ -102,7 +106,10 @@ public class PillarSpawn : MonoBehaviour
         SpawnNewPillar();
 
         if(!player.GetComponent<PlayerMovement>().dead)
+        {
+            gm.hungerScript.Increase();
             removePillarFruit();
+        }
         AimingScript.instance.gameObject.SetActive(false);
         //Disable player control << to do
         playerControl.enabled = false;
