@@ -2,17 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MenuScript : MonoBehaviour
 {
+    public AudioClip btnHoverSfx,btnClickSfx;
+    AudioSource src;
+    private void Start()
+    {
+        src = GetComponent<AudioSource>();
+    }
+
+
     public static string prevScene;
-    public static void ChangeScene(string name)
-    { 
+    public void ChangeScene(string name)
+    {
+        //src.PlayOneShot(btnClickSfx);
         prevScene = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(name); 
     }
-    public static void ChangeScene(int index)
+    public void ChangeScene(int index)
     {
+        //src.PlayOneShot(btnClickSfx);
         prevScene = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(index); 
     }
@@ -20,5 +31,11 @@ public class MenuScript : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void ButtonHover()
+    {
+        //play hover sfx
+        src.PlayOneShot(btnHoverSfx);
     }
 }
