@@ -405,7 +405,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.42, z: -10}
+  m_LocalPosition: {x: 4, y: 4.42, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -774,7 +774,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1591314074}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.5, y: 0, z: 0}
+  m_LocalPosition: {x: 15.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -839,8 +839,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6474727657035328510}
     - target: {fileID: 1541500426779733499, guid: 515be2ff6b05d3245b55b7af47245369, type: 3}
+      propertyPath: turnSpeed
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 1541500426779733499, guid: 515be2ff6b05d3245b55b7af47245369, type: 3}
+      propertyPath: lineLength
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1541500426779733499, guid: 515be2ff6b05d3245b55b7af47245369, type: 3}
       propertyPath: maxPillarHeight
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1541500426779733499, guid: 515be2ff6b05d3245b55b7af47245369, type: 3}
+      propertyPath: playerDistFromPillar
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8960679357406514379, guid: 515be2ff6b05d3245b55b7af47245369, type: 3}
       propertyPath: m_Name
