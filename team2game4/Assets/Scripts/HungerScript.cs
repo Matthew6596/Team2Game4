@@ -28,7 +28,8 @@ public class HungerScript : MonoBehaviour
 
     void Deplete()
     {
-        if(gm.stomachMeter > 0)
+        percent.color = Color.white;
+        if (gm.stomachMeter > 0)
         {
             gm.stomachMeter--;
         }
@@ -41,14 +42,15 @@ public class HungerScript : MonoBehaviour
 
     public void Increase()
     {
-        Debug.Log("Food!");
-        if(gm.stomachMeter < 100 && gm.stomachMeter <= 95)
+        if(gm.stomachMeter < 100 && gm.stomachMeter <= 98)
         {
-            gm.stomachMeter = gm.stomachMeter + 5;
+            gm.stomachMeter = gm.stomachMeter + 2;
+            percent.color = Color.green;
         }
-        else if (gm.stomachMeter < 100 && gm.stomachMeter > 95)
+        else if (gm.stomachMeter < 100 && gm.stomachMeter > 98)
         {
             gm.stomachMeter = 100;
+            percent.color = Color.green;
         }
     }
 }
