@@ -101,7 +101,8 @@ public class PillarSpawn : MonoBehaviour
     {
         SpawnNewPillar();
 
-        removePillarFruit();
+        if(!player.GetComponent<PlayerMovement>().dead)
+            removePillarFruit();
         AimingScript.instance.gameObject.SetActive(false);
         //Disable player control << to do
         playerControl.enabled = false;
@@ -172,10 +173,10 @@ public class PillarSpawn : MonoBehaviour
         Transform p = pillarPlayerOn();
         Debug.Log(p);
         if(p!=null)
-            for(int i=p.childCount+1; i>=0; i--)
+            for(int i=p.childCount-1; i>=0; i--)
             {
-                GameObject c = p.GetChild(0).gameObject;
-                if (c.CompareTag("SafeZone")) //<<Dont work :(
+                GameObject c = p.GetChild(i).gameObject;
+                if (c.CompareTag("SafeZone"))
                 {
                     //make particle here maybe
                     Destroy(c);

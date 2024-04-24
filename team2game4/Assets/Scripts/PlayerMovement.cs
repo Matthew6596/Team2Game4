@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 public class PlayerMovement : MonoBehaviour
 {
     GameManager gm;
-    bool dead = false;
+    public bool dead = false;
     PlayerInput inp;
 
     // Start is called before the first frame update
