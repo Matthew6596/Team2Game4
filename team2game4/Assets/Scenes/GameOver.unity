@@ -393,6 +393,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuScript: {fileID: 0}
+  hungerScript: {fileID: 0}
   stomachMeter: 50
   target: {fileID: 0}
   currPillar: {fileID: 0}
