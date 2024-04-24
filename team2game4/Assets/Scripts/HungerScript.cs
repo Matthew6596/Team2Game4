@@ -15,6 +15,7 @@ public class HungerScript : MonoBehaviour
     void Start()
     {
         gm = GameManager.gm;
+        gm.hungerScript = this;
         percent = gameObject.GetComponent<TMP_Text>();
         InvokeRepeating("Deplete", 3.0f, depleteRate);
     }
@@ -27,11 +28,27 @@ public class HungerScript : MonoBehaviour
 
     void Deplete()
     {
-        gm.stomachMeter--;
+        if(gm.stomachMeter > 0)
+        {
+            gm.stomachMeter--;
+        }
+        else
+        {
+            gm.stomachMeter = 0;
+        }
+        
     }
 
     public void Increase()
     {
-
+        Debug.Log("Food!");
+        if(gm.stomachMeter < 100 && gm.stomachMeter <= 95)
+        {
+            gm.stomachMeter = gm.stomachMeter + 5;
+        }
+        else if (gm.stomachMeter < 100 && gm.stomachMeter > 95)
+        {
+            gm.stomachMeter = 100;
+        }
     }
 }

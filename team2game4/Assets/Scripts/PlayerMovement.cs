@@ -17,7 +17,17 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(gm.stomachMeter <= 0) 
+        {
+            gm.stomachMeter = 0;
+            StartCoroutine("GameOver");
+        }
+
+        if(gm.stomachMeter >= 100)
+        {
+            gm.stomachMeter = 100;
+            StartCoroutine("Win");
+        }
     }
 
     public void Jump(InputAction.CallbackContext ctx)
@@ -50,5 +60,20 @@ public class PlayerMovement : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
         MenuScript.changeScene("GameOver");
+    }
+
+    IEnumerator Win()
+    {
+        yield return new WaitForSeconds(2);
+        MenuScript.changeScene("WinScene");
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+
+        if(other.gameObject.CompareTag("SafeZone") || other.gameObject.CompareTag("Food"))
+        {
+            gm.hungerScript.Increase();
+        }
     }
 }
