@@ -39,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void Jump(InputAction.CallbackContext ctx)
-    {   if(ctx.performed)
+    {   if(ctx.performed && !DebugMenu.instance.mouseOverBtn)
         {
             Debug.Log("click");
             gm.ChangeStateTo(SlimeAnimationState.Jump);
