@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public MenuScript menuScript;
+
     [Header("Player Movement")]
     public GameObject target;
 
