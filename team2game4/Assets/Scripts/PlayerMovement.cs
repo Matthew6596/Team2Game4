@@ -10,11 +10,15 @@ public class PlayerMovement : MonoBehaviour
     public bool dead = false;
     PlayerInput inp;
 
+    public AudioClip splatSfx;
+    AudioSource src;
+
     // Start is called before the first frame update
     void Start()
     {
         gm = GameManager.gm;
         inp = GetComponent<PlayerInput>();
+        src = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -46,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
                 Debug.Log("pillarzone");
                 targetPos =  new Vector3(gm.nextPillar.transform.position.x - 1, gm.nextPillar.transform.position.y, 0);
                 gameObject.transform.position = targetPos;
+                src.PlayOneShot(splatSfx);
                 StartCoroutine("GameOver");
 
             }
