@@ -41,12 +41,11 @@ public class HungerScript : MonoBehaviour
 
     public void Increase()
     {
-        Debug.Log("Food!");
-        if(gm.stomachMeter < 100 && gm.stomachMeter <= 95)
+        if(gm.stomachMeter < 100 && gm.stomachMeter <= 98)
         {
-            gm.stomachMeter = gm.stomachMeter + 5;
+            gm.stomachMeter = gm.stomachMeter + 2;
         }
-        else if (gm.stomachMeter < 100 && gm.stomachMeter > 95)
+        else if (gm.stomachMeter < 100 && gm.stomachMeter > 98)
         {
             gm.stomachMeter = 100;
         }
