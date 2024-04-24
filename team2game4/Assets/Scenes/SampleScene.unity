@@ -1043,26 +1043,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1541500426779733499, guid: 515be2ff6b05d3245b55b7af47245369, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 6474727657035328510}
-    - target: {fileID: 1541500426779733499, guid: 515be2ff6b05d3245b55b7af47245369, type: 3}
-      propertyPath: turnSpeed
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 1541500426779733499, guid: 515be2ff6b05d3245b55b7af47245369, type: 3}
-      propertyPath: lineLength
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1541500426779733499, guid: 515be2ff6b05d3245b55b7af47245369, type: 3}
-      propertyPath: maxPillarHeight
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1541500426779733499, guid: 515be2ff6b05d3245b55b7af47245369, type: 3}
-      propertyPath: playerDistFromPillar
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 8960679357406514379, guid: 515be2ff6b05d3245b55b7af47245369, type: 3}
       propertyPath: m_Name
       value: placeholdPlayer
@@ -1116,8 +1096,3 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 515be2ff6b05d3245b55b7af47245369, type: 3}
---- !u!4 &6474727657035328510 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9152585607215120026, guid: 515be2ff6b05d3245b55b7af47245369, type: 3}
-  m_PrefabInstance: {fileID: 6474727657035328509}
-  m_PrefabAsset: {fileID: 0}

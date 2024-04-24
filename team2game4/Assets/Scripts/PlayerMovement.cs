@@ -31,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
                 Debug.Log("pillarzone");
                 targetPos =  new Vector3(gm.nextPillar.transform.position.x - 1, gm.nextPillar.transform.position.y, 0);
                 gameObject.transform.position = targetPos;
+
             }
             else if (gm.targetCollidingObj == gm.nextOpening)
             {
