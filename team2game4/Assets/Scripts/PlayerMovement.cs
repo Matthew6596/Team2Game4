@@ -78,12 +78,14 @@ public class PlayerMovement : MonoBehaviour
         MenuScript.changeScene("WinScene");
     }
 
+    /*
     private void OnTriggerEnter(Collider other)
     {
 
         if(other.gameObject.CompareTag("SafeZone") || other.gameObject.CompareTag("Food"))
         {
-            gm.hungerScript.Increase();
+            
         }
     }
+    */
 }
