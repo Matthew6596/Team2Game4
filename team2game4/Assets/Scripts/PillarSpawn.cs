@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PillarSpawn : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class PillarSpawn : MonoBehaviour
 
     public GameObject player;
     [NonSerialized]
-    public PlayerMovement playerControl;
+    public PlayerInput playerControl;
 
     [NonSerialized]
     public bool pillarMoving=false;
@@ -35,7 +36,7 @@ public class PillarSpawn : MonoBehaviour
         }
         else
         {
-            playerControl = player.GetComponent<PlayerMovement>();
+            playerControl = player.GetComponent<PlayerInput>();
         }
     }
 

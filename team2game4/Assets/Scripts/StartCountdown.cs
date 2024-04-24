@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class StartCountdown : MonoBehaviour
 {
-    PlayerMovement playerControl;
+    PlayerInput playerControl;
 
     TMP_Text countdownTxt;
     int cnt = 3;
