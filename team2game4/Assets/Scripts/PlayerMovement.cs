@@ -39,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void Jump(InputAction.CallbackContext ctx)
-    {   if(ctx.performed && !DebugMenu.instance.mouseOverBtn)
+    {   if(ctx.performed &&!DebugMenu.instance.mouseOverBtn && !DebugMenu.instance.open)
         {
             Debug.Log("click");
             gm.ChangeStateTo(SlimeAnimationState.Jump);
@@ -51,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
                 targetPos =  new Vector3(gm.nextPillar.transform.position.x - 1, gm.nextPillar.transform.position.y, 0);
                 gameObject.transform.position = targetPos;
                 src.PlayOneShot(splatSfx);
+                dead = true;
                 StartCoroutine("GameOver");
 
             }

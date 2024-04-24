@@ -9,6 +9,7 @@ public class AimingScript : MonoBehaviour
     public float lineLength;
     public float lineThickness;
     public float turnSpeed;
+    public float safeZoneSlowDown;
 
     public Transform player;
 
@@ -64,7 +65,8 @@ public class AimingScript : MonoBehaviour
         }
 
         //Move target
-        target.position = new Vector3(player.position.x+4, Mathf.Tan(transform.rotation.eulerAngles.z*Mathf.Deg2Rad) *4+player.position.y,0);
+        float _spacing = PillarSpawn.instance.horizontalSpacing;
+        target.position = new Vector3(player.position.x+_spacing, Mathf.Tan(transform.rotation.eulerAngles.z*Mathf.Deg2Rad) * _spacing + player.position.y,0);
     }
 
     void TurnAround()

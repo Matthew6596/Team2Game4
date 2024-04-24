@@ -4,18 +4,16 @@ using UnityEngine;
 
 public class TargetScript : MonoBehaviour
 {
+    string prevCollide = "";
     GameManager gm;
+    AimingScript aim;
     // Start is called before the first frame update
     void Start()
     {
         gm = GameManager.gm;
         gm.target = gameObject;
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        aim = AimingScript.instance;
     }
 
     public void OnTriggerEnter(Collider other)
@@ -28,13 +26,25 @@ public class TargetScript : MonoBehaviour
                 gm.currPillar = gm.nextPillar;
                 gm.nextPillar = other.gameObject;
             }
-            Debug.Log("pillar");
+
+            //aim slow down
+            if (prevCollide == "SafeZone")
+            {
+                aim.turnSpeed /= 1-aim.safeZoneSlowDown;
+            }
         }
         else if (other.gameObject.CompareTag("SafeZone"))
         {
             gm.targetCollidingObj = other.gameObject;
             gm.nextOpening = other.gameObject;
-            Debug.Log("safe");
+
+            //aim slow down
+            if (prevCollide == "Pillar")
+            {
+                aim.turnSpeed *= 1-aim.safeZoneSlowDown;
+            }
         }
+
+        prevCollide = other.gameObject.tag;
     }
 }

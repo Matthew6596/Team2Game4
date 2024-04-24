@@ -94,7 +94,7 @@ public class PillarSpawn : MonoBehaviour
         //Remember and remove old Pillar
         Pillars.Add(pillarParent);
 
-        if (Pillars.Count >= 9)
+        if (Pillars.Count >= (1/horizontalSpacing)*40)
         {
             Destroy(Pillars[0]);
             Pillars.RemoveAt(0);
@@ -171,7 +171,7 @@ public class PillarSpawn : MonoBehaviour
     {
         foreach(GameObject p in Pillars)
         {
-            if (p.transform.childCount > 8) return p.transform;
+            if (p.transform.childCount >=10) return p.transform;
         }
         return null;
     }
