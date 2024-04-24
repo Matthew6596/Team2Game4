@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
     {   if(ctx.performed)
         {
             Debug.Log("click");
-            //gm.ChangeStateTo(SlimeAnimationState.Jump);
+            gm.ChangeStateTo(SlimeAnimationState.Jump);
             Vector3 targetPos;
             
             if (gm.targetCollidingObj == gm.nextPillar)
