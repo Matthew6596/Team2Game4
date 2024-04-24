@@ -10,8 +10,16 @@ public class GameManager : MonoBehaviour
     public static GameManager gm;
     private void Awake()
     {
-        Instance = gameObject;
-        gm = this;
+        if (Instance == null)
+        {
+            Instance = gameObject;
+            gm = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     [Header("Player Movement")]
