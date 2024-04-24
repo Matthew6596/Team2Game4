@@ -694,6 +694,78 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &126084366
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 126084367}
+  - component: {fileID: 126084368}
+  m_Layer: 0
+  m_Name: randomFood
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &126084367
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 126084366}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.674, y: 4.444, z: -8.439}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &126084368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 126084366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b2f9b209bc1bc14c9aa4e9c827403fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foodPrefabs:
+  - {fileID: 0}
+  - {fileID: 3842228611903237574, guid: fa587572cc2280f4d93019a565fa436b, type: 3}
+  - {fileID: 2080162570977834968, guid: 5d51f4e26dcc81f48818797cca05913d, type: 3}
+  - {fileID: 8638344394754466231, guid: c436cc62b3490ba4da5d93adfcf47113, type: 3}
+  - {fileID: 733049532245456566, guid: d5267d194331c084aafa0eaa5249e060, type: 3}
+  - {fileID: 1691265689541700079, guid: 61b8175884ffb6040a2dfb14f1dd6067, type: 3}
+  - {fileID: 7915698033114201369, guid: 38697f1dc2f58124c9280b16b4e5cb4a, type: 3}
+  - {fileID: 4863862058620339225, guid: edeaa7c4571555042a2735a747041103, type: 3}
+  - {fileID: 4770667278359790741, guid: c039e9c7498f5ba4ebef66c5e0e27eba, type: 3}
+  - {fileID: 7307532200905089835, guid: 5cbdcf42958d7c643881196f281c0565, type: 3}
+  - {fileID: 6746008801662553333, guid: 352c26490fe20b04a9502033b2cfb208, type: 3}
+  - {fileID: 2417742867091877079, guid: 63663c0b2d49149438c91270064b29a9, type: 3}
+  - {fileID: 8752156047345157306, guid: da4b7bda9325a2b4d9cd44e1eb4fabad, type: 3}
+  - {fileID: 4605311866887700709, guid: d84dddc8f32abc54ebb721dbbe0aaffc, type: 3}
+  - {fileID: 4845243035656678282, guid: 2499c1eb58bc44848a019d337fadc831, type: 3}
+  - {fileID: 1880819146483794855, guid: e5e4f954e33c24d42ba60abeb4d42907, type: 3}
+  - {fileID: 5619982073830596874, guid: dbe460a465f65ea49a993c4425689d88, type: 3}
+  - {fileID: 5600978717857942315, guid: 4fc88965b4cbab4458f4311e43ef0a0f, type: 3}
+  - {fileID: 443455437198695029, guid: 11dc53d1d14fb5e45a7cc3efcbcbf253, type: 3}
+  - {fileID: 366987315853117315, guid: 36ffb08cfb28a514183f1219869a4dd1, type: 3}
+  - {fileID: 2606503517425650290, guid: 7fb571f6fb7130c4498ccd704d54b79d, type: 3}
+  - {fileID: 5254135488136659681, guid: e904ef3bbab33564db141808a07b8d02, type: 3}
+  - {fileID: 9058776198424998283, guid: 3b94f0d37fedc8b4db7d4bdeb675ef05, type: 3}
+  - {fileID: 1056377246451301234, guid: 2e189eb8e7f7c434fb4f09c9970b0a5c, type: 3}
+  - {fileID: 3512911579070131426, guid: 0a1702cc562cf924aa2993c28310e993, type: 3}
+  - {fileID: 1038929082196939743, guid: 8fccde9f02094e8459732eee63858a87, type: 3}
+  - {fileID: 7638017576638435706, guid: 2f78954520472f143a29c14d6429c6e8, type: 3}
 --- !u!1001 &237475214
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -994,6 +1066,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuScript: {fileID: 0}
+  hungerScript: {fileID: 0}
   stomachMeter: 50
   target: {fileID: 0}
   currPillar: {fileID: 0}
