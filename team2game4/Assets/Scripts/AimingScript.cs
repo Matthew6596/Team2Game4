@@ -15,6 +15,8 @@ public class AimingScript : MonoBehaviour
     public float maxPillarHeight;
     public float playerDistFromPillar;
 
+    public Transform target;
+
     float maxAng, minAng;
     bool swapMinMax = false;
 
@@ -60,6 +62,9 @@ public class AimingScript : MonoBehaviour
                 TurnAround();
             }
         }
+
+        //Move target
+        target.position = new Vector3(player.position.x+4, Mathf.Tan(transform.rotation.eulerAngles.z*Mathf.Deg2Rad)*4,0);
     }
 
     void TurnAround()
