@@ -1499,7 +1499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0aba292fedc5f3d4eae17ae063cded66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  depleteRate: 10
+  depleteRate: 1
 --- !u!114 &1107627065
 MonoBehaviour:
   m_ObjectHideFlags: 0
