@@ -7,11 +7,14 @@ using UnityEngine.UIElements;
 public class PlayerMovement : MonoBehaviour
 {
     GameManager gm;
+    bool dead = false;
+    PlayerInput inp;
 
     // Start is called before the first frame update
     void Start()
     {
         gm = GameManager.gm;
+        inp = GetComponent<PlayerInput>();
     }
 
     // Update is called once per frame
@@ -28,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
             gm.stomachMeter = 100;
             StartCoroutine("Win");
         }
+        if (dead && inp.enabled) inp.enabled = false;
     }
 
     public void Jump(InputAction.CallbackContext ctx)
@@ -58,6 +62,7 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator GameOver()
     {
+        inp.enabled = false;
         yield return new WaitForSeconds(2);
         MenuScript.changeScene("GameOver");
     }
