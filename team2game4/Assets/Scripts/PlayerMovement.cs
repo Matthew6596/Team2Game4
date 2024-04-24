@@ -41,12 +41,14 @@ public class PlayerMovement : MonoBehaviour
                 targetPos = gm.nextOpening.transform.position;
                 gameObject.transform.position = targetPos;
             }
+
+            PillarSpawn.instance.MovePillars();
         }
     }
 
     IEnumerator GameOver()
     {
         yield return new WaitForSeconds(2);
-        gm.menuScript.ChangeScene("GameOver");
+        MenuScript.changeScene("GameOver");
     }
 }

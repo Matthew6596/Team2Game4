@@ -8,6 +8,7 @@ public class PillarSpawn : MonoBehaviour
     public static PillarSpawn instance;
 
     public GameObject pillarBlock;
+    public GameObject safeSpot;
 
     public int minGapSize, maxGapSize;
     public float horizontalSpacing, moveSpeed;
@@ -70,9 +71,10 @@ public class PillarSpawn : MonoBehaviour
             }
             else
             {
-                pillar[i] = new GameObject("PillarGap" + i);
-                pillar[i].transform.parent = pillarParent.transform;
+                pillar[i] = Instantiate(safeSpot,pillarParent.transform);
+                pillar[i].transform.position = Vector3.up * i;
             }
+            pillar[i].gameObject.tag = "SafeZone";
         }
 
         //Position pillar

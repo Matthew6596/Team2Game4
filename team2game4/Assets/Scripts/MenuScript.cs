@@ -19,6 +19,11 @@ public class MenuScript : MonoBehaviour
 
 
     public static string prevScene;
+    public static void changeScene(string name)
+    {
+        prevScene = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(name);
+    }
     public void ChangeScene(string name)
     {
         //src.PlayOneShot(btnClickSfx);
