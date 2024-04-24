@@ -2595,6 +2595,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73bf1072d11c8794e880a4dca51d843b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dead: 0
 --- !u!114 &5529954180915873286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2607,7 +2608,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47e9144fd133eff4e90bc49b5142089f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lineLength: 1.5
+  lineLength: 2.5
   lineThickness: 0.1
   turnSpeed: 40
   player: {fileID: 2800779792609449319}
