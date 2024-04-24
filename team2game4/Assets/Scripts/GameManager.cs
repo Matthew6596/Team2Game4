@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     }
 
     public MenuScript menuScript;
+    public HungerScript hungerScript;
     public int stomachMeter = 50;
 
     [Header("Player Movement")]
