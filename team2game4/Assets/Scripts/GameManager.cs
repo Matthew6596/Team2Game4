@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     public GameObject currPillar;
     public GameObject nextPillar;
     public GameObject nextOpening;
+    public GameObject targetCollidingObj;
 
     [Space]
     [Header("Slime Stuff")]
@@ -31,7 +32,7 @@ public class GameManager : MonoBehaviour
     public Camera cam;
     private void Start()
     {
-        
+        /*
         idleBut.onClick.AddListener( delegate { Idle(); } );
         walkBut.onClick.AddListener(delegate {  ChangeStateTo(SlimeAnimationState.Walk); });
         jumpBut.onClick.AddListener(delegate { LookAtCamera(); ChangeStateTo(SlimeAnimationState.Jump); });
@@ -39,6 +40,7 @@ public class GameManager : MonoBehaviour
         damageBut0.onClick.AddListener(delegate { LookAtCamera(); ChangeStateTo(SlimeAnimationState.Damage); mainSlime.GetComponent<EnemyAi>().damType = 0; });
         damageBut1.onClick.AddListener(delegate { LookAtCamera(); ChangeStateTo(SlimeAnimationState.Damage); mainSlime.GetComponent<EnemyAi>().damType = 1; });
         damageBut2.onClick.AddListener(delegate { LookAtCamera(); ChangeStateTo(SlimeAnimationState.Damage); mainSlime.GetComponent<EnemyAi>().damType = 2; });
+        */
     }
     void Idle()
     {

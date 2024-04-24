@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Pillar
   - Food
+  - SafeZone
   layers:
   - Default
   - TransparentFX
