@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class DebugMenu : MonoBehaviour
 {
@@ -13,12 +14,32 @@ public class DebugMenu : MonoBehaviour
 
     public Slider PillarMinGap, PillarMaxGap, PillarSpacing, SafeSlowDown;
 
+    GameManager gm;
+    PillarSpawn pilSpawn;
+    AimingScript aimScript;
+
+    bool changesNeedSceneReset=false;
+
     private void Start()
     {
         instance = this;
+        gm = GameManager.gm;
+        pilSpawn = PillarSpawn.instance;
+        aimScript = AimingScript.instance;
 
-        PillarSpawn pilSpawn = PillarSpawn.instance;
-        //Event listeners
+        //Set all values based on GameManager
+        pilSpawn.maxGapSize = gm.maxPillarGap;
+        pilSpawn.minGapSize = gm.minPillarGap;
+        pilSpawn.horizontalSpacing = gm.pillarSpacing;
+        aimScript.safeZoneSlowDown = gm.safeZoneSlowDown;
+
+        //Set initial input values
+        PillarMaxGap.value = pilSpawn.maxGapSize;
+        PillarMinGap.value = pilSpawn.minGapSize;
+        PillarSpacing.value = pilSpawn.horizontalSpacing;
+        SafeSlowDown.value = aimScript.safeZoneSlowDown;
+
+        //Add Input Event listeners
         PillarMinGap.onValueChanged.AddListener((float val) => //<< Parameter and "onValueChanged" different based on input type
         {
             if (val > pilSpawn.maxGapSize)
@@ -43,7 +64,7 @@ public class DebugMenu : MonoBehaviour
         });*/
         /*SafeSlowDown.onValueChanged.AddListener((float val) =>
         {
-            AimingScript.instance.safeZoneSlowDown = val;
+            aimScript.safeZoneSlowDown = val;
         });*/
     }
 
@@ -57,6 +78,16 @@ public class DebugMenu : MonoBehaviour
         debugPanel.SetActive(!debugPanel.activeSelf);
         Time.timeScale = (debugPanel.activeSelf)?0:1;
         open = debugPanel.activeSelf;
+
+        //Set GameManager Values
+        gm.maxPillarGap = pilSpawn.maxGapSize;
+        gm.minPillarGap = pilSpawn.minGapSize;
+        gm.pillarSpacing = pilSpawn.horizontalSpacing;
+        gm.safeZoneSlowDown = aimScript.safeZoneSlowDown;
+        //
+
+        //Reset the game scene if needed
+        if (changesNeedSceneReset) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     public void SelectPreset()
     {

@@ -37,6 +37,13 @@ public class GameManager : MonoBehaviour
     public GameObject targetCollidingObj;
 
     [Space]
+    [Header("Debug Settings")]
+    public int minPillarGap; //1-8
+    public int maxPillarGap;
+    public float pillarSpacing;
+    public float safeZoneSlowDown; //0-1
+
+    [Space]
     [Header("Slime Stuff")]
     //Slime Stuff
     public GameObject mainSlime;
