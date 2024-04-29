@@ -18,14 +18,17 @@ public class DebugMenu : MonoBehaviour
     PillarSpawn pilSpawn;
     AimingScript aimScript;
 
-    bool changesNeedSceneReset=false;
-
     private void Start()
     {
         instance = this;
         gm = GameManager.gm;
         pilSpawn = PillarSpawn.instance;
         aimScript = AimingScript.instance;
+
+        if (gm == null || pilSpawn == null || aimScript == null) { 
+            StartCoroutine(lateStart());
+            return;
+        }
 
         //Set all values based on GameManager
         pilSpawn.maxGapSize = gm.maxPillarGap;
@@ -58,14 +61,14 @@ public class DebugMenu : MonoBehaviour
             }
             pilSpawn.maxGapSize = (int)val;
         });
-        /*PillarSpacing.onValueChanged.AddListener((float val) =>
+        PillarSpacing.onValueChanged.AddListener((float val) =>
         {
             pilSpawn.horizontalSpacing = val;
-        });*/
-        /*SafeSlowDown.onValueChanged.AddListener((float val) =>
+        });
+        SafeSlowDown.onValueChanged.AddListener((float val) =>
         {
             aimScript.safeZoneSlowDown = val;
-        });*/
+        });
     }
 
     public void MouseOverBtn(bool perhaps)
@@ -86,8 +89,9 @@ public class DebugMenu : MonoBehaviour
         gm.safeZoneSlowDown = aimScript.safeZoneSlowDown;
         //
 
-        //Reset the game scene if needed
-        if (changesNeedSceneReset) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        //Reset the game scene to apply changes more safely
+        if(!open)
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     public void SelectPreset()
     {
@@ -103,5 +107,10 @@ public class DebugMenu : MonoBehaviour
                 
                 break;
         }
+    }
+    IEnumerator lateStart()
+    {
+        yield return null;
+        Start();
     }
 }

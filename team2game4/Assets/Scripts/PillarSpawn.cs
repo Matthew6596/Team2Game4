@@ -30,6 +30,7 @@ public class PillarSpawn : MonoBehaviour
     private void Start()
     {
         gm = GameManager.gm;
+        horizontalSpacing = gm.pillarSpacing;
 
         instance = this;
         StartPillars();
@@ -41,18 +42,21 @@ public class PillarSpawn : MonoBehaviour
         else
         {
             playerControl = player.GetComponent<PlayerInput>();
+
+            //Do math to set players init pos
         }
     }
 
     public void StartPillars()
     {
         Pillars.Clear();
-        SpawnNewPillar();
-        SpawnNewPillar();
-        SpawnNewPillar();
-        Pillars[0].transform.position = transform.position + (3 * horizontalSpacing * Vector3.left);
-        Pillars[1].transform.position = transform.position+(2 * horizontalSpacing * Vector3.left);
-        Pillars[2].transform.position = transform.position+(horizontalSpacing * Vector3.left);
+        int numInitPillars = Mathf.FloorToInt(12/horizontalSpacing);
+        for (int i = 0; i <numInitPillars; i++)
+        {
+            SpawnNewPillar();
+            Pillars[i].transform.position = transform.position + ((numInitPillars-i) * horizontalSpacing * Vector3.left);
+        }
+        player.transform.position = transform.position + ((numInitPillars+1) * horizontalSpacing * Vector3.left);
     }
 
     public void SpawnNewPillar()

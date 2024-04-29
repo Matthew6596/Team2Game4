@@ -1057,6 +1057,10 @@ MonoBehaviour:
   nextPillar: {fileID: 0}
   nextOpening: {fileID: 0}
   targetCollidingObj: {fileID: 0}
+  minPillarGap: 3
+  maxPillarGap: 3
+  pillarSpacing: 4
+  safeZoneSlowDown: 0
   mainSlime: {fileID: 0}
   idleBut: {fileID: 0}
   walkBut: {fileID: 0}
