@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
     public int maxPillarGap;
     public float pillarSpacing;
     public float safeZoneSlowDown; //0-1
+    public float aimLineThickness, aimLineLength; //0-0.5, 0-5
 
     [Space]
     [Header("Slime Stuff")]

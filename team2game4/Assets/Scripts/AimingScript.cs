@@ -29,7 +29,7 @@ public class AimingScript : MonoBehaviour
         instance = this;
 
         lineSpriteObj = transform.GetChild(0);
-        lineSpriteObj.localScale = new Vector3(lineLength,lineThickness,1);
+        lineSpriteObj.localScale = new Vector3(lineLength, lineThickness, 1);
         lineSpriteObj.localPosition = new Vector3(lineLength / 2, 0, 0);
 
         transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -97,5 +97,12 @@ public class AimingScript : MonoBehaviour
     public void SetRotation(float ang)
     {
         transform.rotation = Quaternion.Euler(0, 0, ang);
+    }
+
+    public void UpdateLine(float length, float thickness)
+    {
+        lineLength = length; lineThickness = thickness;
+        lineSpriteObj.localScale = new Vector3(lineLength, lineThickness, 1);
+        lineSpriteObj.localPosition = new Vector3(lineLength / 2, 0, 0);
     }
 }

@@ -1061,6 +1061,8 @@ MonoBehaviour:
   maxPillarGap: 3
   pillarSpacing: 4
   safeZoneSlowDown: 0
+  aimLineThickness: 0.1
+  aimLineLength: 2.5
   mainSlime: {fileID: 0}
   idleBut: {fileID: 0}
   walkBut: {fileID: 0}

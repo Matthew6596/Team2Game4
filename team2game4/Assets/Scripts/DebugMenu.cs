@@ -12,7 +12,11 @@ public class DebugMenu : MonoBehaviour
     public bool open;
     public TMP_Dropdown presetDrop;
 
-    public Slider PillarMinGap, PillarMaxGap, PillarSpacing, SafeSlowDown;
+    //Inputs
+    public Slider PillarMinGap, PillarMaxGap, PillarSpacing, SafeSlowDown, AimLineThickness, AimLineLength;
+
+    //Value Displays
+    public TMP_Text minGapTxt, maxGapTxt, spacingTxt, safeSlowDownTxt, lineThicknessTxt, lineLengthTxt;
 
     GameManager gm;
     PillarSpawn pilSpawn;
@@ -35,15 +39,25 @@ public class DebugMenu : MonoBehaviour
         pilSpawn.minGapSize = gm.minPillarGap;
         pilSpawn.horizontalSpacing = gm.pillarSpacing;
         aimScript.safeZoneSlowDown = gm.safeZoneSlowDown;
+        aimScript.UpdateLine(gm.aimLineLength, gm.aimLineThickness);
 
         //Set initial input values
         PillarMaxGap.value = pilSpawn.maxGapSize;
         PillarMinGap.value = pilSpawn.minGapSize;
         PillarSpacing.value = pilSpawn.horizontalSpacing;
         SafeSlowDown.value = aimScript.safeZoneSlowDown;
+        AimLineLength.value = aimScript.lineLength;
+        AimLineThickness.value = aimScript.lineThickness;
+        //Set initial label values
+        minGapTxt.text = pilSpawn.minGapSize.ToString();
+        maxGapTxt.text = pilSpawn.maxGapSize.ToString();
+        spacingTxt.text = pilSpawn.horizontalSpacing.ToString();
+        safeSlowDownTxt.text = aimScript.safeZoneSlowDown.ToString();
+        lineLengthTxt.text = aimScript.lineLength.ToString();
+        lineThicknessTxt.text = aimScript.lineThickness.ToString();
 
         //Add Input Event listeners
-        PillarMinGap.onValueChanged.AddListener((float val) => //<< Parameter and "onValueChanged" different based on input type
+        PillarMinGap.onValueChanged.AddListener((float val) =>
         {
             if (val > pilSpawn.maxGapSize)
             {
@@ -51,6 +65,7 @@ public class DebugMenu : MonoBehaviour
                 PillarMinGap.value = val;
             }
             pilSpawn.minGapSize = (int)val;
+            minGapTxt.text = ((int)val).ToString();
         });
         PillarMaxGap.onValueChanged.AddListener((float val) =>
         {
@@ -60,14 +75,23 @@ public class DebugMenu : MonoBehaviour
                 PillarMaxGap.value = val;
             }
             pilSpawn.maxGapSize = (int)val;
+            maxGapTxt.text = ((int)val).ToString();
         });
-        PillarSpacing.onValueChanged.AddListener((float val) =>
-        {
-            pilSpawn.horizontalSpacing = val;
+        PillarSpacing.onValueChanged.AddListener((float val) => { 
+            pilSpawn.horizontalSpacing = val; 
+            spacingTxt.text = val.ToString();
         });
-        SafeSlowDown.onValueChanged.AddListener((float val) =>
-        {
+        SafeSlowDown.onValueChanged.AddListener((float val) => { 
             aimScript.safeZoneSlowDown = val;
+            safeSlowDownTxt.text = val.ToString();
+        });
+        AimLineLength.onValueChanged.AddListener((float val) => { 
+            aimScript.UpdateLine(val, aimScript.lineThickness); 
+            lineLengthTxt.text = val.ToString();
+        });
+        AimLineThickness.onValueChanged.AddListener((float val) => { 
+            aimScript.UpdateLine(aimScript.lineLength, val); 
+            lineThicknessTxt.text = val.ToString();
         });
     }
 
@@ -87,6 +111,8 @@ public class DebugMenu : MonoBehaviour
         gm.minPillarGap = pilSpawn.minGapSize;
         gm.pillarSpacing = pilSpawn.horizontalSpacing;
         gm.safeZoneSlowDown = aimScript.safeZoneSlowDown;
+        gm.aimLineLength = aimScript.lineLength;
+        gm.aimLineThickness = aimScript.lineThickness;
         //
 
         //Reset the game scene to apply changes more safely
