@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class TargetScript : MonoBehaviour
 {
+    public static TargetScript instance;
+
     string prevCollide = "";
     GameManager gm;
     AimingScript aim;
     // Start is called before the first frame update
     void Start()
     {
+        instance = this;
         gm = GameManager.gm;
         gm.target = gameObject;
 
