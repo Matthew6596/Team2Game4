@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
     public float pillarSpacing;
     public float safeZoneSlowDown; //0-1
     public float aimLineThickness, aimLineLength, aimLineSpeed; //0-0.5, 0-5, 1-100
+    public float aimLineSpeedIncrease; //0-1
     public int hungerDepleteAmount; //1-10
     public int foodIncreaseAmount; //1-10
     public bool reticleOn;
