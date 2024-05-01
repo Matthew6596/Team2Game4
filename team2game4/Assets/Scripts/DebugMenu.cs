@@ -15,6 +15,8 @@ public class DebugMenu : MonoBehaviour
     //Inputs
     public Slider PillarMinGap, PillarMaxGap, PillarSpacing, SafeSlowDown, AimLineThickness, AimLineLength, AimLineSpeed, AimLineSpeedIncrease, HungerDepleteAmount, FoodIncreaseAmount;
 
+    public Toggle reticleToggle;
+
     //Value Displays
     public TMP_Text minGapTxt,   maxGapTxt,  spacingTxt,   safeSlowDownTxt, lineThicknessTxt, lineLengthTxt, lineSpeedTxt, lineSpeedIncreaseTxt, hungerSpeedTxt, foodIncreaseTxt;
 
@@ -31,13 +33,13 @@ public class DebugMenu : MonoBehaviour
         aimScript = AimingScript.instance;
         hungyScript = HungerScript.instance; //new
 
-        if (gm == null || pilSpawn == null || aimScript == null || hungyScript == null) {  //new
+        if (gm == null || pilSpawn == null || aimScript == null || hungyScript == null || TargetScript.instance==null) {  //new
             StartCoroutine(lateStart());
             return;
         }
 
         //Set all values based on GameManager
-        SetAllValues(gm.maxPillarGap, gm.minPillarGap, gm.pillarSpacing, gm.safeZoneSlowDown, gm.aimLineLength, gm.aimLineThickness, gm.aimLineSpeed, gm.aimLineSpeedIncrease, gm.hungerDepleteAmount, gm.foodIncreaseAmount);
+        SetAllValues(gm.maxPillarGap, gm.minPillarGap, gm.pillarSpacing, gm.safeZoneSlowDown, gm.aimLineLength, gm.aimLineThickness, gm.aimLineSpeed, gm.aimLineSpeedIncrease, gm.hungerDepleteAmount, gm.foodIncreaseAmount,gm.reticleOn);
 
         //Add Input Event listeners
         PillarMinGap.onValueChanged.AddListener((float val) =>
@@ -117,6 +119,7 @@ public class DebugMenu : MonoBehaviour
         gm.aimLineSpeedIncrease = aimScript.turnSpeedIncrease;
         gm.hungerDepleteAmount = hungyScript.depleteBy;
         gm.foodIncreaseAmount = hungyScript.increaseAmount;
+        gm.reticleOn = reticleToggle.isOn;
         //
 
         //Reset the game scene to apply changes more safely
@@ -132,20 +135,20 @@ public class DebugMenu : MonoBehaviour
         switch (presetDrop.value)
         {
             case (1): //set EVIl values
-                SetAllValues(1, 2, 7, 0, 1.5f, 0.1f,60, 10,5,2);
+                SetAllValues(1, 2, 7, 0, 1.5f, 0.1f,60, 10,5,2,false);
                 break;
             case (2): //set EZ peazy values
-                SetAllValues(5, 5, 4.5f, 0.4f, 3.5f, 0.15f,40, 0,1,10);
+                SetAllValues(5, 5, 4.5f, 0.4f, 3.5f, 0.15f,40, 0,1,10,true);
                 break;
             default: //set Standard values
-                SetAllValues(3, 3, 4, 0.1f, 2.5f, 0.1f,40,0, 2,5);
+                SetAllValues(3, 3, 4, 0.1f, 2.5f, 0.1f,40,0, 2,5,false);
                 break;
         }
     }
 
     //Where copied SetAllValues code is: replace with SetAllValues(gm.whatever,..);
 
-    public void SetAllValues(int maxGap, int minGap, float hozPilSpace, float slowDown, float lineLen, float lineThick, float lineSpd, float lineSpdInc, int hungerDeplete, int foodInc)
+    public void SetAllValues(int maxGap, int minGap, float hozPilSpace, float slowDown, float lineLen, float lineThick, float lineSpd, float lineSpdInc, int hungerDeplete, int foodInc, bool reticleOn)
     {
         //Set all values based on GameManager
         pilSpawn.maxGapSize = maxGap;
@@ -157,6 +160,7 @@ public class DebugMenu : MonoBehaviour
         aimScript.turnSpeedIncrease = lineSpdInc;
         hungyScript.depleteBy = hungerDeplete;
         hungyScript.increaseAmount = foodInc;
+        TargetScript.instance.transform.GetChild(0).gameObject.SetActive(reticleOn);
 
         //Set initial input values
         PillarMaxGap.value = pilSpawn.maxGapSize;
@@ -170,6 +174,7 @@ public class DebugMenu : MonoBehaviour
         AimLineSpeedIncrease.value = aimScript.turnSpeedIncrease;
         HungerDepleteAmount.value = hungyScript.depleteBy;
         FoodIncreaseAmount.value = hungyScript.increaseAmount;
+        reticleToggle.isOn = reticleOn;
 
         //Set initial label values
         minGapTxt.text = pilSpawn.minGapSize.ToString();
