@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AimingScript : MonoBehaviour
@@ -10,6 +11,7 @@ public class AimingScript : MonoBehaviour
     public float lineThickness;
     public float turnSpeed;
     public float safeZoneSlowDown;
+    public float turnSpeedIncrease;
 
     public Transform player;
 
@@ -23,10 +25,14 @@ public class AimingScript : MonoBehaviour
 
     Transform lineSpriteObj;
 
+    bool secPass = false;
+    GameManager gm;
+
     // Start is called before the first frame update
     void Start()
     {
         instance = this;
+        gm = GameManager.gm;
 
         lineSpriteObj = transform.GetChild(0);
         lineSpriteObj.localScale = new Vector3(lineLength, lineThickness, 1);
@@ -39,11 +45,30 @@ public class AimingScript : MonoBehaviour
         maxAng = 270;
 
         UpdateMinMaxAngles();
+        StartCoroutine(SecTimer());
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(turnSpeedIncrease > 0 && secPass)
+        {
+            Debug.Log("hi");
+            if (turnSpeedIncrease <= 99)
+            {
+                IncreaseSpeed();
+                if(turnSpeed > 0)
+                {
+                    turnSpeed += turnSpeedIncrease;
+                }
+                else
+                {
+                    turnSpeed -= turnSpeedIncrease;
+                }
+            }
+            else
+                turnSpeed = 100;
+        }
         //Rotate
         transform.Rotate(turnSpeed * Time.deltaTime*Vector3.forward);
 
@@ -104,5 +129,26 @@ public class AimingScript : MonoBehaviour
         lineLength = length; lineThickness = thickness;
         lineSpriteObj.localScale = new Vector3(lineLength, lineThickness, 1);
         lineSpriteObj.localPosition = new Vector3(lineLength / 2, 0, 0);
+    }
+
+    void IncreaseSpeed()
+    {
+        if (turnSpeedIncrease >= 10)
+        {
+            turnSpeedIncrease += 10;
+        }
+        else
+        {
+            turnSpeedIncrease = 10;
+        }
+    }
+
+    IEnumerator SecTimer()
+    {
+        secPass = false;
+        yield return new WaitForSeconds(15);
+        secPass = true;
+        yield return null;
+        StartCoroutine(SecTimer());
     }
 }

@@ -13,10 +13,10 @@ public class DebugMenu : MonoBehaviour
     public TMP_Dropdown presetDrop;
 
     //Inputs
-    public Slider PillarMinGap, PillarMaxGap, PillarSpacing, SafeSlowDown, AimLineThickness, AimLineLength, AimLineSpeed, HungerDepleteAmount, FoodIncreaseAmount;
+    public Slider PillarMinGap, PillarMaxGap, PillarSpacing, SafeSlowDown, AimLineThickness, AimLineLength, AimLineSpeed, AimLineSpeedIncrease, HungerDepleteAmount, FoodIncreaseAmount;
 
     //Value Displays
-    public TMP_Text minGapTxt,     maxGapTxt,  spacingTxt,   safeSlowDownTxt, lineThicknessTxt, lineLengthTxt, lineSpeedTxt, hungerSpeedTxt, foodIncreaseTxt;
+    public TMP_Text minGapTxt,   maxGapTxt,  spacingTxt,   safeSlowDownTxt, lineThicknessTxt, lineLengthTxt, lineSpeedTxt, lineSpeedIncreaseTxt, hungerSpeedTxt, foodIncreaseTxt;
 
     GameManager gm;
     PillarSpawn pilSpawn;
@@ -37,7 +37,7 @@ public class DebugMenu : MonoBehaviour
         }
 
         //Set all values based on GameManager
-        SetAllValues(gm.maxPillarGap, gm.minPillarGap, gm.pillarSpacing, gm.safeZoneSlowDown, gm.aimLineLength, gm.aimLineThickness, gm.aimLineSpeed, gm.hungerDepleteAmount, gm.foodIncreaseAmount);
+        SetAllValues(gm.maxPillarGap, gm.minPillarGap, gm.pillarSpacing, gm.safeZoneSlowDown, gm.aimLineLength, gm.aimLineThickness, gm.aimLineSpeed, gm.aimLineSpeedIncrease, gm.hungerDepleteAmount, gm.foodIncreaseAmount);
 
         //Add Input Event listeners
         PillarMinGap.onValueChanged.AddListener((float val) =>
@@ -81,6 +81,10 @@ public class DebugMenu : MonoBehaviour
             aimScript.turnSpeed = val;
             lineSpeedTxt.text = val.ToString();
         });
+        AimLineSpeedIncrease.onValueChanged.AddListener((float val) => {
+            aimScript.turnSpeedIncrease = val;
+            lineSpeedIncreaseTxt.text = val.ToString();
+        });
         HungerDepleteAmount.onValueChanged.AddListener((float val) => {
             hungyScript.depleteBy = (int)val;
             hungerSpeedTxt.text = ((int)val).ToString();
@@ -110,6 +114,7 @@ public class DebugMenu : MonoBehaviour
         gm.aimLineLength = aimScript.lineLength;
         gm.aimLineThickness = aimScript.lineThickness;
         gm.aimLineSpeed = aimScript.turnSpeed;
+        gm.aimLineSpeedIncrease = aimScript.turnSpeedIncrease;
         gm.hungerDepleteAmount = hungyScript.depleteBy;
         gm.foodIncreaseAmount = hungyScript.increaseAmount;
         //
@@ -127,20 +132,20 @@ public class DebugMenu : MonoBehaviour
         switch (presetDrop.value)
         {
             case (1): //set EVIl values
-                SetAllValues(1, 2, 7, 0, 1.5f, 0.1f,60,5,2);
+                SetAllValues(1, 2, 7, 0, 1.5f, 0.1f,60, 10,5,2);
                 break;
             case (2): //set EZ peazy values
-                SetAllValues(5, 5, 4.5f, 0.4f, 3.5f, 0.15f,40,1,10);
+                SetAllValues(5, 5, 4.5f, 0.4f, 3.5f, 0.15f,40, 0,1,10);
                 break;
             default: //set Standard values
-                SetAllValues(3, 3, 4, 0.1f, 2.5f, 0.1f,40,2,5);
+                SetAllValues(3, 3, 4, 0.1f, 2.5f, 0.1f,40,0, 2,5);
                 break;
         }
     }
 
     //Where copied SetAllValues code is: replace with SetAllValues(gm.whatever,..);
 
-    public void SetAllValues(int maxGap, int minGap, float hozPilSpace, float slowDown, float lineLen, float lineThick, float lineSpd, int hungerDeplete, int foodInc)
+    public void SetAllValues(int maxGap, int minGap, float hozPilSpace, float slowDown, float lineLen, float lineThick, float lineSpd, float lineSpdInc, int hungerDeplete, int foodInc)
     {
         //Set all values based on GameManager
         pilSpawn.maxGapSize = maxGap;
@@ -149,6 +154,7 @@ public class DebugMenu : MonoBehaviour
         aimScript.safeZoneSlowDown = slowDown;
         aimScript.UpdateLine(lineLen, lineThick);
         aimScript.turnSpeed = lineSpd;
+        aimScript.turnSpeedIncrease = lineSpdInc;
         hungyScript.depleteBy = hungerDeplete;
         hungyScript.increaseAmount = foodInc;
 
@@ -161,6 +167,7 @@ public class DebugMenu : MonoBehaviour
         AimLineThickness.value = aimScript.lineThickness;
         //Set new initial input values
         AimLineSpeed.value = aimScript.turnSpeed;
+        AimLineSpeedIncrease.value = aimScript.turnSpeedIncrease;
         HungerDepleteAmount.value = hungyScript.depleteBy;
         FoodIncreaseAmount.value = hungyScript.increaseAmount;
 
@@ -173,6 +180,7 @@ public class DebugMenu : MonoBehaviour
         lineThicknessTxt.text = aimScript.lineThickness.ToString();
         //Set new initial label values
         lineSpeedTxt.text = aimScript.turnSpeed.ToString();
+        lineSpeedIncreaseTxt.text = aimScript.turnSpeedIncrease.ToString();
         hungerSpeedTxt.text = hungyScript.depleteBy.ToString();
         foodIncreaseTxt.text = hungyScript.increaseAmount.ToString();
     }
