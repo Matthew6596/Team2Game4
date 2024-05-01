@@ -13,14 +13,15 @@ public class DebugMenu : MonoBehaviour
     public TMP_Dropdown presetDrop;
 
     //Inputs
-    public Slider PillarMinGap, PillarMaxGap, PillarSpacing, SafeSlowDown, AimLineThickness, AimLineLength;
+    public Slider PillarMinGap, PillarMaxGap, PillarSpacing, SafeSlowDown, AimLineThickness, AimLineLength, AimLineSpeed, HungerDepleteAmount, FoodIncreaseAmount;
 
     //Value Displays
-    public TMP_Text minGapTxt, maxGapTxt, spacingTxt, safeSlowDownTxt, lineThicknessTxt, lineLengthTxt;
+    public TMP_Text minGapTxt,     maxGapTxt,  spacingTxt,   safeSlowDownTxt, lineThicknessTxt, lineLengthTxt, lineSpeedTxt, hungerSpeedTxt, foodIncreaseTxt;
 
     GameManager gm;
     PillarSpawn pilSpawn;
     AimingScript aimScript;
+    HungerScript hungyScript; //new
 
     private void Start()
     {
@@ -28,8 +29,9 @@ public class DebugMenu : MonoBehaviour
         gm = GameManager.gm;
         pilSpawn = PillarSpawn.instance;
         aimScript = AimingScript.instance;
+        hungyScript = HungerScript.instance; //new
 
-        if (gm == null || pilSpawn == null || aimScript == null) { 
+        if (gm == null || pilSpawn == null || aimScript == null || hungyScript == null) {  //new
             StartCoroutine(lateStart());
             return;
         }
@@ -40,6 +42,9 @@ public class DebugMenu : MonoBehaviour
         pilSpawn.horizontalSpacing = gm.pillarSpacing;
         aimScript.safeZoneSlowDown = gm.safeZoneSlowDown;
         aimScript.UpdateLine(gm.aimLineLength, gm.aimLineThickness);
+        aimScript.turnSpeed = gm.aimLineSpeed;
+        hungyScript.depleteBy = gm.hungerDepleteAmount;
+        hungyScript.increaseAmount = gm.foodIncreaseAmount;
 
         //Set initial input values
         PillarMaxGap.value = pilSpawn.maxGapSize;
@@ -48,6 +53,11 @@ public class DebugMenu : MonoBehaviour
         SafeSlowDown.value = aimScript.safeZoneSlowDown;
         AimLineLength.value = aimScript.lineLength;
         AimLineThickness.value = aimScript.lineThickness;
+        //Set new initial input values
+        AimLineSpeed.value = aimScript.turnSpeed;
+        HungerDepleteAmount.value = hungyScript.depleteBy;
+        FoodIncreaseAmount.value = hungyScript.increaseAmount;
+
         //Set initial label values
         minGapTxt.text = pilSpawn.minGapSize.ToString();
         maxGapTxt.text = pilSpawn.maxGapSize.ToString();
@@ -55,6 +65,10 @@ public class DebugMenu : MonoBehaviour
         safeSlowDownTxt.text = aimScript.safeZoneSlowDown.ToString();
         lineLengthTxt.text = aimScript.lineLength.ToString();
         lineThicknessTxt.text = aimScript.lineThickness.ToString();
+        //Set new initial label values
+        lineSpeedTxt.text = aimScript.turnSpeed.ToString();
+        hungerSpeedTxt.text = hungyScript.depleteBy.ToString();
+        foodIncreaseTxt.text = hungyScript.increaseAmount.ToString();
 
         //Add Input Event listeners
         PillarMinGap.onValueChanged.AddListener((float val) =>
@@ -93,6 +107,19 @@ public class DebugMenu : MonoBehaviour
             aimScript.UpdateLine(aimScript.lineLength, val); 
             lineThicknessTxt.text = val.ToString();
         });
+        //Add New Input Event listeners
+        AimLineSpeed.onValueChanged.AddListener((float val) => {
+            aimScript.turnSpeed = val;
+            lineSpeedTxt.text = val.ToString();
+        });
+        HungerDepleteAmount.onValueChanged.AddListener((float val) => {
+            hungyScript.depleteBy = (int)val;
+            hungerSpeedTxt.text = ((int)val).ToString();
+        });
+        FoodIncreaseAmount.onValueChanged.AddListener((float val) => {
+            hungyScript.increaseAmount = (int)val;
+            foodIncreaseTxt.text = ((int)val).ToString();
+        });
     }
 
     public void MouseOverBtn(bool perhaps)
@@ -113,11 +140,18 @@ public class DebugMenu : MonoBehaviour
         gm.safeZoneSlowDown = aimScript.safeZoneSlowDown;
         gm.aimLineLength = aimScript.lineLength;
         gm.aimLineThickness = aimScript.lineThickness;
+        gm.aimLineSpeed = aimScript.turnSpeed;
+        gm.hungerDepleteAmount = hungyScript.depleteBy;
+        gm.foodIncreaseAmount = hungyScript.increaseAmount;
         //
 
         //Reset the game scene to apply changes more safely
         if(!open)
+        {
+            gm.stomachMeter = 50;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+            
     }
     public void SelectPreset()
     {
