@@ -37,38 +37,7 @@ public class DebugMenu : MonoBehaviour
         }
 
         //Set all values based on GameManager
-        pilSpawn.maxGapSize = gm.maxPillarGap;
-        pilSpawn.minGapSize = gm.minPillarGap;
-        pilSpawn.horizontalSpacing = gm.pillarSpacing;
-        aimScript.safeZoneSlowDown = gm.safeZoneSlowDown;
-        aimScript.UpdateLine(gm.aimLineLength, gm.aimLineThickness);
-        aimScript.turnSpeed = gm.aimLineSpeed;
-        hungyScript.depleteBy = gm.hungerDepleteAmount;
-        hungyScript.increaseAmount = gm.foodIncreaseAmount;
-
-        //Set initial input values
-        PillarMaxGap.value = pilSpawn.maxGapSize;
-        PillarMinGap.value = pilSpawn.minGapSize;
-        PillarSpacing.value = pilSpawn.horizontalSpacing;
-        SafeSlowDown.value = aimScript.safeZoneSlowDown;
-        AimLineLength.value = aimScript.lineLength;
-        AimLineThickness.value = aimScript.lineThickness;
-        //Set new initial input values
-        AimLineSpeed.value = aimScript.turnSpeed;
-        HungerDepleteAmount.value = hungyScript.depleteBy;
-        FoodIncreaseAmount.value = hungyScript.increaseAmount;
-
-        //Set initial label values
-        minGapTxt.text = pilSpawn.minGapSize.ToString();
-        maxGapTxt.text = pilSpawn.maxGapSize.ToString();
-        spacingTxt.text = pilSpawn.horizontalSpacing.ToString();
-        safeSlowDownTxt.text = aimScript.safeZoneSlowDown.ToString();
-        lineLengthTxt.text = aimScript.lineLength.ToString();
-        lineThicknessTxt.text = aimScript.lineThickness.ToString();
-        //Set new initial label values
-        lineSpeedTxt.text = aimScript.turnSpeed.ToString();
-        hungerSpeedTxt.text = hungyScript.depleteBy.ToString();
-        foodIncreaseTxt.text = hungyScript.increaseAmount.ToString();
+        SetAllValues(gm.maxPillarGap, gm.minPillarGap, gm.pillarSpacing, gm.safeZoneSlowDown, gm.aimLineLength, gm.aimLineThickness, gm.aimLineSpeed, gm.hungerDepleteAmount, gm.foodIncreaseAmount);
 
         //Add Input Event listeners
         PillarMinGap.onValueChanged.AddListener((float val) =>
@@ -158,15 +127,54 @@ public class DebugMenu : MonoBehaviour
         switch (presetDrop.value)
         {
             case (1): //set EVIl values
-                
+                SetAllValues(1, 2, 7, 0, 1.5f, 0.1f,60,5,2);
                 break;
             case (2): //set EZ peazy values
-                
+                SetAllValues(5, 5, 4.5f, 0.4f, 3.5f, 0.15f,40,1,10);
                 break;
             default: //set Standard values
-                
+                SetAllValues(3, 3, 4, 0.1f, 2.5f, 0.1f,40,2,5);
                 break;
         }
+    }
+
+    //Where copied SetAllValues code is: replace with SetAllValues(gm.whatever,..);
+
+    public void SetAllValues(int maxGap, int minGap, float hozPilSpace, float slowDown, float lineLen, float lineThick, float lineSpd, int hungerDeplete, int foodInc)
+    {
+        //Set all values based on GameManager
+        pilSpawn.maxGapSize = maxGap;
+        pilSpawn.minGapSize = minGap;
+        pilSpawn.horizontalSpacing = hozPilSpace;
+        aimScript.safeZoneSlowDown = slowDown;
+        aimScript.UpdateLine(lineLen, lineThick);
+        aimScript.turnSpeed = lineSpd;
+        hungyScript.depleteBy = hungerDeplete;
+        hungyScript.increaseAmount = foodInc;
+
+        //Set initial input values
+        PillarMaxGap.value = pilSpawn.maxGapSize;
+        PillarMinGap.value = pilSpawn.minGapSize;
+        PillarSpacing.value = pilSpawn.horizontalSpacing;
+        SafeSlowDown.value = aimScript.safeZoneSlowDown;
+        AimLineLength.value = aimScript.lineLength;
+        AimLineThickness.value = aimScript.lineThickness;
+        //Set new initial input values
+        AimLineSpeed.value = aimScript.turnSpeed;
+        HungerDepleteAmount.value = hungyScript.depleteBy;
+        FoodIncreaseAmount.value = hungyScript.increaseAmount;
+
+        //Set initial label values
+        minGapTxt.text = pilSpawn.minGapSize.ToString();
+        maxGapTxt.text = pilSpawn.maxGapSize.ToString();
+        spacingTxt.text = pilSpawn.horizontalSpacing.ToString();
+        safeSlowDownTxt.text = aimScript.safeZoneSlowDown.ToString();
+        lineLengthTxt.text = aimScript.lineLength.ToString();
+        lineThicknessTxt.text = aimScript.lineThickness.ToString();
+        //Set new initial label values
+        lineSpeedTxt.text = aimScript.turnSpeed.ToString();
+        hungerSpeedTxt.text = hungyScript.depleteBy.ToString();
+        foodIncreaseTxt.text = hungyScript.increaseAmount.ToString();
     }
     IEnumerator lateStart()
     {
