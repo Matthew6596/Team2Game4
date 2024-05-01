@@ -33,7 +33,7 @@ public class DebugMenu : MonoBehaviour
         aimScript = AimingScript.instance;
         hungyScript = HungerScript.instance; //new
 
-        if (gm == null || pilSpawn == null || aimScript == null || hungyScript == null) {  //new
+        if (gm == null || pilSpawn == null || aimScript == null || hungyScript == null || TargetScript.instance==null) {  //new
             StartCoroutine(lateStart());
             return;
         }
