@@ -26,6 +26,7 @@ public class AimingScript : MonoBehaviour
     Transform lineSpriteObj;
 
     bool secPass = false;
+    bool timerStarted = false;
     GameManager gm;
 
     // Start is called before the first frame update
@@ -51,6 +52,11 @@ public class AimingScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!timerStarted)
+        {
+            StartCoroutine(SecTimer());
+        }
+
         if(turnSpeedIncrease > 0 && secPass)
         {
             Debug.Log("hi");
@@ -145,6 +151,8 @@ public class AimingScript : MonoBehaviour
 
     IEnumerator SecTimer()
     {
+        timerStarted = true;
+        Debug.Log(turnSpeedIncrease);
         secPass = false;
         yield return new WaitForSeconds(15);
         secPass = true;
