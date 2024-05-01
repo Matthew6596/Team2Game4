@@ -10,13 +10,17 @@ public class HungerScript : MonoBehaviour
     TMP_Text percent;
 
     public float depleteRate = 2.0f;
+    public int depleteBy = 1;
     public int increaseAmount = 5;
+
+    public static HungerScript instance;
 
     // Start is called before the first frame update
     void Start()
     {
         gm = GameManager.gm;
         gm.hungerScript = this;
+        instance = this;
         percent = gameObject.GetComponent<TMP_Text>();
         InvokeRepeating("Deplete", 3.0f, depleteRate);
     }
@@ -27,12 +31,12 @@ public class HungerScript : MonoBehaviour
         percent.text = gm.stomachMeter.ToString() + "%";
     }
 
-    void Deplete()
+    public void Deplete()
     {
         percent.color = Color.white;
         if (gm.stomachMeter > 0)
         {
-            gm.stomachMeter--;
+            gm.stomachMeter = gm.stomachMeter - depleteBy;
         }
         else if(gm.stomachMeter >= 100)
         {
