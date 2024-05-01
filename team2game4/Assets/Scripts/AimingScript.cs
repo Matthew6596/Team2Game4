@@ -25,15 +25,13 @@ public class AimingScript : MonoBehaviour
 
     Transform lineSpriteObj;
 
-    bool secPass = false;
-    bool timerStarted = false;
-    GameManager gm;
+    //bool secPass = false;
+    //bool timerStarted = false;
 
     // Start is called before the first frame update
     void Start()
     {
         instance = this;
-        gm = GameManager.gm;
 
         lineSpriteObj = transform.GetChild(0);
         lineSpriteObj.localScale = new Vector3(lineLength, lineThickness, 1);
@@ -46,12 +44,13 @@ public class AimingScript : MonoBehaviour
         maxAng = 270;
 
         UpdateMinMaxAngles();
-        StartCoroutine(SecTimer());
+        //StartCoroutine(SecTimer());
     }
 
     // Update is called once per frame
     void Update()
     {
+        /*
         if(!timerStarted)
         {
             StartCoroutine(SecTimer());
@@ -75,6 +74,7 @@ public class AimingScript : MonoBehaviour
             else
                 turnSpeed = 100;
         }
+        */
         //Rotate
         transform.Rotate(turnSpeed * Time.deltaTime*Vector3.forward);
 
@@ -137,6 +137,7 @@ public class AimingScript : MonoBehaviour
         lineSpriteObj.localPosition = new Vector3(lineLength / 2, 0, 0);
     }
 
+    /*
     void IncreaseSpeed()
     {
         if (turnSpeedIncrease >= 10)
@@ -148,7 +149,8 @@ public class AimingScript : MonoBehaviour
             turnSpeedIncrease = 10;
         }
     }
-
+    */
+    /*
     IEnumerator SecTimer()
     {
         timerStarted = true;
@@ -159,4 +161,5 @@ public class AimingScript : MonoBehaviour
         yield return null;
         StartCoroutine(SecTimer());
     }
+    */
 }
