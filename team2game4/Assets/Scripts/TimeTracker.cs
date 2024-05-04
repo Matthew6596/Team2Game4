@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class TimeTracker : MonoBehaviour
@@ -11,10 +12,18 @@ public class TimeTracker : MonoBehaviour
     public float timeRounded { get{ return RoundTwoPlaces(time); } }
     public string timeString { get { return AddZerosToDecimalString(RoundTwoPlaces(time)); } }
 
+    public TMP_Text timerTxt;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
         instance = this;
+
+        TMP_Text _t = gameObject.GetComponent<TMP_Text>();
+        if(_t!=null) timerTxt = _t;
+
         StartCoroutine(startCountdown());
     }
 
@@ -24,6 +33,8 @@ public class TimeTracker : MonoBehaviour
         if (started)
         {
             time += Time.deltaTime;
+
+            if(timerTxt!=null) timerTxt.text = "Time: "+timeString;
         }
     }
 
