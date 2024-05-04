@@ -168,6 +168,7 @@ public class DebugMenu : MonoBehaviour
         hungyScript.depleteBy = hungerDeplete;
         hungyScript.increaseAmount = foodInc;
         TargetScript.instance.transform.GetChild(0).gameObject.SetActive(reticleOn);
+        pilSpawn.StartPillars();
 
         //Set initial input values
         PillarMaxGap.value = pilSpawn.maxGapSize;

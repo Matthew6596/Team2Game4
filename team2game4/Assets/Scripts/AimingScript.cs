@@ -75,6 +75,15 @@ public class AimingScript : MonoBehaviour
                 turnSpeed = 100;
         }
         */
+
+
+        if (player.GetComponent<PlayerMovement>().dead) //player dead, don't show line
+        {
+            lineSpriteObj.gameObject.SetActive(false);
+            TargetScript.instance.gameObject.SetActive(false);
+        }
+
+
         //Rotate
         transform.Rotate(turnSpeed * Time.deltaTime*Vector3.forward);
 

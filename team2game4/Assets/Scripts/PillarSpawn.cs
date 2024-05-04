@@ -33,7 +33,7 @@ public class PillarSpawn : MonoBehaviour
         horizontalSpacing = gm.pillarSpacing;
 
         instance = this;
-        StartPillars();
+        //StartPillars(); //<<HEY!!! if DebugMenu script is not being used at all, uncomment this
 
         if (player == null)
         {
