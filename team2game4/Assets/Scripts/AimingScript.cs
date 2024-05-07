@@ -77,7 +77,7 @@ public class AimingScript : MonoBehaviour
         */
 
 
-        if (player.GetComponent<PlayerMovement>().dead) //player dead, don't show line
+        if (player.GetComponent<PlayerMovement>().dead || player.GetComponent<PlayerMovement>().won) //player dead, don't show line
         {
             lineSpriteObj.gameObject.SetActive(false);
             TargetScript.instance.gameObject.SetActive(false);

@@ -7,11 +7,13 @@ using UnityEngine.UIElements;
 public class PlayerMovement : MonoBehaviour
 {
     GameManager gm;
-    public bool dead = false;
+    public bool dead = false, won=false;
     PlayerInput inp;
 
     public AudioClip splatSfx;
     AudioSource src;
+
+    Coroutine winCo;
 
     // Start is called before the first frame update
     void Start()
@@ -33,13 +35,14 @@ public class PlayerMovement : MonoBehaviour
         if(gm.stomachMeter >= 100)
         {
             gm.stomachMeter = 100;
-            StartCoroutine("Win");
+            if(winCo==null)
+                winCo = StartCoroutine("Win");
         }
         if (dead && inp.enabled) inp.enabled = false;
     }
 
     public void Jump(InputAction.CallbackContext ctx)
-    {   if(ctx.performed &&!DebugMenu.instance.mouseOverBtn && !DebugMenu.instance.open)
+    {   if(ctx.performed &&!won&&!DebugMenu.instance.mouseOverBtn && !DebugMenu.instance.open)
         {
             Debug.Log("click");
             gm.ChangeStateTo(SlimeAnimationState.Jump);
@@ -69,12 +72,18 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator GameOver()
     {
         inp.enabled = false;
+        gm.prevTime = TimeTracker.instance.time; //don't set best time, didn't win
+
         yield return new WaitForSeconds(2);
         MenuScript.changeScene("GameOver");
     }
 
     IEnumerator Win()
     {
+        inp.enabled = false; won = true;
+        gm.prevTime = TimeTracker.instance.time;
+        if (gm.prevTime < gm.bestSessionTime) gm.bestSessionTime = gm.prevTime; //Smaller/Faster time is better
+
         yield return new WaitForSeconds(2);
         MenuScript.changeScene("WinScene");
     }

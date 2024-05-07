@@ -10,16 +10,17 @@ public class TimeTracker : MonoBehaviour
     bool started = false;
     public float time { get; private set; }
     public float timeRounded { get{ return RoundTwoPlaces(time); } }
-    public string timeString { get { return AddZerosToDecimalString(RoundTwoPlaces(time)); } }
+    public string timeString { get { return FloatToString(time); } }
 
     public TMP_Text timerTxt;
-
-
+    public float startDelay;
 
     // Start is called before the first frame update
     void Start()
     {
         instance = this;
+
+        time = 0;
 
         TMP_Text _t = gameObject.GetComponent<TMP_Text>();
         if(_t!=null) timerTxt = _t;
@@ -58,7 +59,12 @@ public class TimeTracker : MonoBehaviour
 
     IEnumerator startCountdown()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(startDelay);
         started = true;
+    }
+
+    public static string FloatToString(float num)
+    {
+        return AddZerosToDecimalString(RoundTwoPlaces(num));
     }
 }

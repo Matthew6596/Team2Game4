@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using JetBrains.Annotations; //why isn't this being used :(
+using JetBrains.Annotations; //why isn't this being used :(   //we just want it to *feel* like it's included
 
 public class GameManager : MonoBehaviour
 {
@@ -25,6 +25,9 @@ public class GameManager : MonoBehaviour
     public MenuScript menuScript;
     public HungerScript hungerScript;
     public int stomachMeter = 50;
+
+    public float bestSessionTime=float.MaxValue;
+    public float prevTime=float.MaxValue;
 
     [Header("Player Movement")]
     public GameObject target;

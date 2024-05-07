@@ -4776,6 +4776,8 @@ MonoBehaviour:
   menuScript: {fileID: 0}
   hungerScript: {fileID: 0}
   stomachMeter: 50
+  bestSessionTime: 0
+  prevTime: 0
   target: {fileID: 0}
   currPillar: {fileID: 0}
   nextPillar: {fileID: 0}
@@ -9469,6 +9471,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerTxt: {fileID: 0}
+  startDelay: 3
 --- !u!1 &1588045135
 GameObject:
   m_ObjectHideFlags: 0
