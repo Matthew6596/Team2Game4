@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -17,6 +18,13 @@ public class MenuScript : MonoBehaviour
         gm.menuScript = this;
     }
 
+    public void MouseLeftClick(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            src.PlayOneShot(btnClickSfx,1f);
+        }
+    }
 
     public static string prevScene;
     public static void changeScene(string name)
@@ -48,7 +56,7 @@ public class MenuScript : MonoBehaviour
     public void ButtonHover()
     {
         //play hover sfx
-        src.PlayOneShot(btnHoverSfx);
+        src.PlayOneShot(btnHoverSfx,0.7f);
     }
 
     public void OpenPopup(GameObject _group)

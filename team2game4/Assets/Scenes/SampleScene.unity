@@ -12278,7 +12278,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dead: 0
+  won: 0
   splatSfx: {fileID: 8300000, guid: bce76c6a77496d74cb7a05c7b4f46caf, type: 3}
+  foodGetSfx: {fileID: 8300000, guid: 81e00fb450c36c44f96824d6cfe47be1, type: 3}
 --- !u!114 &5529954180915873286
 MonoBehaviour:
   m_ObjectHideFlags: 0

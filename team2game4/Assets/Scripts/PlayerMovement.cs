@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public bool dead = false, won=false;
     PlayerInput inp;
 
-    public AudioClip splatSfx;
+    public AudioClip splatSfx, foodGetSfx;
     AudioSource src;
 
     Coroutine winCo;
@@ -61,6 +61,7 @@ public class PlayerMovement : MonoBehaviour
             else if (gm.targetCollidingObj == gm.nextOpening)
             {
                 Debug.Log("safezone");
+                src.PlayOneShot(foodGetSfx);
                 targetPos = gm.nextOpening.transform.position;
                 gameObject.transform.position = targetPos;
             }
