@@ -57,6 +57,18 @@ public class MenuScript : MonoBehaviour
     {
         //play hover sfx
         src.PlayOneShot(btnHoverSfx,0.7f);
+
+        //Grow btn
+    }
+    public void ButtonNotHover()
+    {
+        //Shrink button to normal size
+    }
+
+    public void PlayWithPreset(int preset) //0 standard, 1 evil, 2 ez, 3 custom
+    {
+        gm.StartWithPreset(preset);
+        ChangeScene("SampleScene");
     }
 
     public void OpenPopup(GameObject _group)
