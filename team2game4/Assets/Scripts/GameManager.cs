@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using JetBrains.Annotations; //why isn't this being used :(   //we just want it to *feel* like it's included
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -88,5 +89,32 @@ public class GameManager : MonoBehaviour
     void LookAtCamera()
     {
        mainSlime.transform.rotation = Quaternion.Euler(new Vector3(mainSlime.transform.rotation.x, cam.transform.rotation.y, mainSlime.transform.rotation.z));   
+    }
+
+    public void StartWithPreset(int preset)
+    {
+        StartCoroutine(setPreset(preset));
+    }
+    IEnumerator setPreset(int p)
+    {
+        //Wait till scene is on sample scene (debug menu is only on sample scene)
+        while (SceneManager.GetActiveScene().name != "SampleScene")
+        {
+            yield return null;
+        }
+        yield return null;
+
+        //Set preset
+
+        if (p == 3) //custom
+        {
+
+        }
+        else
+            DebugMenu.instance.SelectPreset(p);
+
+        //Reset Scene
+        stomachMeter = 50;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

@@ -152,6 +152,24 @@ public class DebugMenu : MonoBehaviour
                 break;
         }
     }
+    public void SelectPreset(int val)
+    {
+        switch (val)
+        {
+            case (1): //set EVIl values
+                SetAllValues(1, 2, 7, 0, 1.5f, 0.1f, 75, 4, 3, false);
+                //SetAllValues(1, 2, 7, 0, 1.5f, 0.1f,60, 10,5,2,false);
+                break;
+            case (2): //set EZ peazy values
+                SetAllValues(5, 5, 4.5f, 0.4f, 3.5f, 0.15f, 40, 1, 10, true);
+                //SetAllValues(5, 5, 4.5f, 0.4f, 3.5f, 0.15f,40, 0,1,10,true);
+                break;
+            default: //set Standard values
+                SetAllValues(3, 3, 4.75f, 0.1f, 2.5f, 0.1f, 45, 2, 6, false);
+                //SetAllValues(3, 3, 4, 0.1f, 2.5f, 0.1f,40,0, 2,5,false);
+                break;
+        }
+    }
 
     //Where copied SetAllValues code is: replace with SetAllValues(gm.whatever,..);
 
