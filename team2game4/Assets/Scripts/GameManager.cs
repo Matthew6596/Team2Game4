@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
     public float bestSessionTime=float.MaxValue;
     public float prevTime=float.MaxValue;
 
+    public GameObject foodVFX;
+
     [Header("Player Movement")]
     public GameObject target;
 
