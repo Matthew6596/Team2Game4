@@ -4778,6 +4778,8 @@ MonoBehaviour:
   stomachMeter: 50
   bestSessionTime: 0
   prevTime: 0
+  foodVFX: {fileID: 0}
+  deathVFX: {fileID: 0}
   target: {fileID: 0}
   currPillar: {fileID: 0}
   nextPillar: {fileID: 0}
@@ -12281,6 +12283,8 @@ MonoBehaviour:
   won: 0
   splatSfx: {fileID: 8300000, guid: bce76c6a77496d74cb7a05c7b4f46caf, type: 3}
   foodGetSfx: {fileID: 8300000, guid: 81e00fb450c36c44f96824d6cfe47be1, type: 3}
+  winSFX: {fileID: 8300000, guid: 044bcab526efdc54ba13c18812a39941, type: 3}
+  deathSFX: {fileID: 8300000, guid: 410d6b31b8382724b827c69e9536ca10, type: 3}
 --- !u!114 &5529954180915873286
 MonoBehaviour:
   m_ObjectHideFlags: 0
