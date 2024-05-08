@@ -70,12 +70,12 @@ Material:
     - _OutlineSoftness: 0
     - _OutlineUVSpeedX: 0
     - _OutlineUVSpeedY: 0
-    - _OutlineWidth: 0
+    - _OutlineWidth: 0.23
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
-    - _ScaleRatioA: 1
-    - _ScaleRatioB: 1
-    - _ScaleRatioC: 1
+    - _ScaleRatioA: 0.8333333
+    - _ScaleRatioB: 0.6770833
+    - _ScaleRatioC: 0.6770833
     - _ScaleX: 1
     - _ScaleY: 1
     - _ShaderFlags: 0
@@ -168,9 +168,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
   m_Name: PinkChicken-Regular SDF
   m_EditorClassIdentifier: 
-  hashCode: 0
+  hashCode: 17290299
   material: {fileID: -3061931950066060048}
-  materialHashCode: 0
+  materialHashCode: -714187461
   m_Version: 1.1.0
   m_SourceFontFileGUID: 644578bbd81992e4b8d6dc172becf2d3
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 644578bbd81992e4b8d6dc172becf2d3, type: 3}
