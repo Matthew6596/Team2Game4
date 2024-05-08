@@ -1055,6 +1055,7 @@ MonoBehaviour:
   bestSessionTime: 3.4028235e+38
   prevTime: 3.4028235e+38
   foodVFX: {fileID: 9115928492232104928, guid: 19025209d8bcbc54186e61ea16a7570e, type: 3}
+  deathVFX: {fileID: 7470227973387613865, guid: ca75c8425bb2a0143a1146cff2b82be1, type: 3}
   target: {fileID: 0}
   currPillar: {fileID: 0}
   nextPillar: {fileID: 0}
