@@ -72,6 +72,9 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator GameOver()
     {
+        Vector3 pos = new Vector3(gameObject.transform.position.x - 5, gameObject.transform.position.y, gameObject.transform.position.z);
+        Instantiate(gm.deathVFX, pos, gm.deathVFX.transform.rotation);
+
         inp.enabled = false;
         gm.prevTime = TimeTracker.instance.time; //don't set best time, didn't win
 
