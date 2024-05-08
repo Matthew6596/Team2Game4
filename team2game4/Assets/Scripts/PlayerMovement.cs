@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public bool dead = false, won=false;
     PlayerInput inp;
 
-    public AudioClip splatSfx, foodGetSfx;
+    public AudioClip splatSfx, foodGetSfx, winSFX, deathSFX;
     AudioSource src;
 
     Coroutine winCo;
@@ -26,8 +26,9 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(gm.stomachMeter <= 0) 
+        if(gm.stomachMeter <= 0 && !dead) 
         {
+            dead = true;
             gm.stomachMeter = 0;
             StartCoroutine("GameOver");
         }
@@ -54,6 +55,10 @@ public class PlayerMovement : MonoBehaviour
                 targetPos =  new Vector3(gm.nextPillar.transform.position.x - 1, gm.nextPillar.transform.position.y, 0);
                 gameObject.transform.position = targetPos;
                 src.PlayOneShot(splatSfx);
+
+                Vector3 pos = new Vector3(gameObject.transform.position.x - 5, gameObject.transform.position.y, gameObject.transform.position.z);
+                Instantiate(gm.deathVFX, pos, gm.deathVFX.transform.rotation);
+
                 dead = true;
                 StartCoroutine("GameOver");
 
@@ -72,6 +77,8 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator GameOver()
     {
+        src.PlayOneShot(deathSFX);
+
         inp.enabled = false;
         gm.prevTime = TimeTracker.instance.time; //don't set best time, didn't win
 
@@ -81,6 +88,8 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator Win()
     {
+        src.PlayOneShot(winSFX);
+
         inp.enabled = false; won = true;
         gm.prevTime = TimeTracker.instance.time;
         if (gm.prevTime < gm.bestSessionTime) gm.bestSessionTime = gm.prevTime; //Smaller/Faster time is better

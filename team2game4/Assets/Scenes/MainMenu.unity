@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1054,6 +1054,8 @@ MonoBehaviour:
   stomachMeter: 50
   bestSessionTime: 3.4028235e+38
   prevTime: 3.4028235e+38
+  foodVFX: {fileID: 9115928492232104928, guid: 19025209d8bcbc54186e61ea16a7570e, type: 3}
+  deathVFX: {fileID: 7470227973387613865, guid: ca75c8425bb2a0143a1146cff2b82be1, type: 3}
   target: {fileID: 0}
   currPillar: {fileID: 0}
   nextPillar: {fileID: 0}
@@ -1061,14 +1063,14 @@ MonoBehaviour:
   targetCollidingObj: {fileID: 0}
   minPillarGap: 3
   maxPillarGap: 3
-  pillarSpacing: 4
+  pillarSpacing: 4.75
   safeZoneSlowDown: 0
   aimLineThickness: 0.1
   aimLineLength: 2.5
-  aimLineSpeed: 40
+  aimLineSpeed: 45
   aimLineSpeedIncrease: 0
   hungerDepleteAmount: 2
-  foodIncreaseAmount: 5
+  foodIncreaseAmount: 6
   reticleOn: 0
   mainSlime: {fileID: 0}
   idleBut: {fileID: 0}
@@ -3498,7 +3500,7 @@ MonoBehaviour:
     Kawaii
     Slimes by
 
-    Ayaii Studio
+    Awaii Studio
 
 
     Foods by

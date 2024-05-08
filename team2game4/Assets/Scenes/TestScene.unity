@@ -1495,11 +1495,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuScript: {fileID: 0}
+  hungerScript: {fileID: 0}
+  stomachMeter: 50
+  bestSessionTime: 3.4028235e+38
+  prevTime: 3.4028235e+38
+  foodVFX: {fileID: 0}
   target: {fileID: 0}
   currPillar: {fileID: 0}
   nextPillar: {fileID: 0}
   nextOpening: {fileID: 0}
   targetCollidingObj: {fileID: 0}
+  minPillarGap: 0
+  maxPillarGap: 0
+  pillarSpacing: 0
+  safeZoneSlowDown: 0
+  aimLineThickness: 0
+  aimLineLength: 0
+  aimLineSpeed: 0
+  aimLineSpeedIncrease: 0
+  hungerDepleteAmount: 0
+  foodIncreaseAmount: 0
+  reticleOn: 0
   mainSlime: {fileID: 0}
   idleBut: {fileID: 0}
   walkBut: {fileID: 0}
