@@ -111,7 +111,10 @@ public class GameManager : MonoBehaviour
 
         }
         else
+        {
             DebugMenu.instance.SelectPreset(p);
+            DebugMenu.instance.SetGMValues();
+        }
 
         //Reset Scene
         stomachMeter = 50;

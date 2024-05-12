@@ -112,6 +112,18 @@ public class DebugMenu : MonoBehaviour
         Time.timeScale = (debugPanel.activeSelf)?0:1;
         open = debugPanel.activeSelf;
 
+        SetGMValues();
+
+        //Reset the game scene to apply changes more safely
+        if(!open)
+        {
+            gm.stomachMeter = 50;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+            
+    }
+    public void SetGMValues()
+    {
         //Set GameManager Values
         gm.maxPillarGap = pilSpawn.maxGapSize;
         gm.minPillarGap = pilSpawn.minGapSize;
@@ -125,14 +137,6 @@ public class DebugMenu : MonoBehaviour
         gm.foodIncreaseAmount = hungyScript.increaseAmount;
         gm.reticleOn = reticleToggle.isOn;
         //
-
-        //Reset the game scene to apply changes more safely
-        if(!open)
-        {
-            gm.stomachMeter = 50;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
-            
     }
     public void SelectPreset()
     {
