@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 37592834}
   - component: {fileID: 37592833}
   - component: {fileID: 37592836}
+  - component: {fileID: 37592837}
   m_Layer: 5
   m_Name: menuBtn
   m_TagString: Untagged
@@ -287,6 +288,50 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 37592837}
+          m_TargetAssemblyTypeName: ButtonHoverJuice, Assembly-CSharp
+          m_MethodName: ButtonHover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 37592837}
+          m_TargetAssemblyTypeName: ButtonHoverJuice, Assembly-CSharp
+          m_MethodName: ButtonNotHover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &37592837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 37592831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98f69f6315dc7cb41b15388a19b7a964, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  growScale: {x: 1.25, y: 1.15, z: 1}
+  tweenRate: 0.2
+  wobbleSpeed: 10
+  wobbleAmount: 3
 --- !u!1 &126084366
 GameObject:
   m_ObjectHideFlags: 0
@@ -1296,6 +1341,7 @@ GameObject:
   - component: {fileID: 572114962}
   - component: {fileID: 572114961}
   - component: {fileID: 572114964}
+  - component: {fileID: 572114965}
   m_Layer: 5
   m_Name: quitBtn
   m_TagString: Untagged
@@ -1447,6 +1493,50 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 572114965}
+          m_TargetAssemblyTypeName: ButtonHoverJuice, Assembly-CSharp
+          m_MethodName: ButtonHover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 572114965}
+          m_TargetAssemblyTypeName: ButtonHoverJuice, Assembly-CSharp
+          m_MethodName: ButtonNotHover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &572114965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 572114959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98f69f6315dc7cb41b15388a19b7a964, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  growScale: {x: 1.25, y: 1.15, z: 1}
+  tweenRate: 0.2
+  wobbleSpeed: 10
+  wobbleAmount: 2
 --- !u!1 &670706183
 GameObject:
   m_ObjectHideFlags: 0
@@ -2095,6 +2185,7 @@ GameObject:
   - component: {fileID: 1049019481}
   - component: {fileID: 1049019480}
   - component: {fileID: 1049019483}
+  - component: {fileID: 1049019484}
   m_Layer: 5
   m_Name: playBtn
   m_TagString: Untagged
@@ -2246,6 +2337,50 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 1049019484}
+          m_TargetAssemblyTypeName: ButtonHoverJuice, Assembly-CSharp
+          m_MethodName: ButtonHover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1049019484}
+          m_TargetAssemblyTypeName: ButtonHoverJuice, Assembly-CSharp
+          m_MethodName: ButtonNotHover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &1049019484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1049019478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98f69f6315dc7cb41b15388a19b7a964, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  growScale: {x: 1.25, y: 1.15, z: 1}
+  tweenRate: 0.2
+  wobbleSpeed: 10
+  wobbleAmount: 4
 --- !u!1 &1240480805
 GameObject:
   m_ObjectHideFlags: 0
