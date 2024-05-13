@@ -9,6 +9,8 @@ public class TargetScript : MonoBehaviour
     string prevCollide = "";
     GameManager gm;
     AimingScript aim;
+
+    Transform reticle;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +18,13 @@ public class TargetScript : MonoBehaviour
         gm = GameManager.gm;
         gm.target = gameObject;
 
+        reticle = transform.GetChild(0);
         aim = AimingScript.instance;
+    }
+
+    private void Update()
+    {
+        reticle.rotation = Tween.Wobble(6, 70);
     }
 
     public void OnTriggerEnter(Collider other)
