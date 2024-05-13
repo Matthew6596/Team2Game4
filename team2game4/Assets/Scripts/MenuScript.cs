@@ -57,8 +57,6 @@ public class MenuScript : MonoBehaviour
     {
         //play hover sfx
         src.PlayOneShot(btnHoverSfx,0.7f);
-
-        //Grow btn
     }
     public void ButtonNotHover()
     {
