@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class ButtonHoverJuice : MonoBehaviour
 {
@@ -29,8 +28,7 @@ public class ButtonHoverJuice : MonoBehaviour
         //Wobble
         if (hovered)
         {
-            float ang = Mathf.Sin(wobbleSpeed*Time.time) * wobbleAmount;
-            transform.localRotation = Quaternion.Euler(0,0,ang);
+            transform.localRotation = Tween.Wobble(wobbleSpeed, wobbleAmount);
         }
     }
     
@@ -58,9 +56,12 @@ public class Tween
         if (currentNum < targetNum) return currentNum + (targetNum - currentNum) * rate;
         else return currentNum + (currentNum - targetNum) * -rate;
     }
-    public static void LazyTween(UnityEngine.Transform currentTransform, UnityEngine.Transform targetTransform, float rate)
+    public static void LazyTween(Transform currentTransform, Transform targetTransform, float rate)
     {
         currentTransform.SetLocalPositionAndRotation(LazyTween(currentTransform.localPosition, targetTransform.localPosition, rate), Quaternion.Euler(LazyTween(currentTransform.localRotation.eulerAngles, targetTransform.localRotation.eulerAngles, rate)));
         currentTransform.localScale = LazyTween(currentTransform.localScale, targetTransform.localScale, rate);
     }
+    public static Quaternion Wobble(float speed, float amount,float time){return Quaternion.Euler(0, 0, Mathf.Sin(speed * time) * amount);}
+    public static Quaternion Wobble(float speed, float amount) { return Quaternion.Euler(0, 0, Mathf.Sin(speed * Time.time) * amount); }
+
 }
