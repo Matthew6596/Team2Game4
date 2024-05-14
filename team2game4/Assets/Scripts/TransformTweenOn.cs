@@ -28,7 +28,7 @@ public class TransformTweenOn : MonoBehaviour
         startTransform.localScale = t.localScale;
 
         //Destroy temp transform
-        //Destroy(g);
+        Destroy(g);
 
         StartCoroutine(delayAtStart());   
     }
