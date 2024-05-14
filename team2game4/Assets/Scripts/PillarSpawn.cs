@@ -20,6 +20,8 @@ public class PillarSpawn : MonoBehaviour
 
     public List<GameObject> Pillars = new();
 
+    public GameObject[] planes;
+
     public GameObject player;
     [NonSerialized]
     public PlayerInput playerControl;
@@ -121,15 +123,22 @@ public class PillarSpawn : MonoBehaviour
         if (!pillarMoving)
         {
             //Making sure each pillar ends in *exact* correct position
-            float[] endPositions = new float[Pillars.Count+1];
+            float[] endPositions = new float[Pillars.Count+3];
             for (int i = 0; i < Pillars.Count; i++) endPositions[i] = Pillars[i].transform.position.x - horizontalSpacing;
             endPositions[Pillars.Count] = player.transform.position.x - horizontalSpacing;
+            endPositions[Pillars.Count + 1] = planes[0].transform.position.x - horizontalSpacing;
+            endPositions[Pillars.Count + 2] = planes[1].transform.position.x - horizontalSpacing;
+
 
             //Move Pillars
             //and player
             Pillars.Add(player);
+            Pillars.Add(planes[0]);
+            Pillars.Add(planes[1]);
             StartCoroutine(movePillars(Pillars.ToArray(),endPositions));
             Pillars.Remove(player);
+            Pillars.Remove(planes[0]);
+            Pillars.Remove(planes[1]);
 
             pillarMoving = true; //set bool to prevent spam
         }
