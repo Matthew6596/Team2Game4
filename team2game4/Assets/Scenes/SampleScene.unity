@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -850,7 +850,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 498, y: 111}
+  m_AnchoredPosition: {x: 498, y: 149}
   m_SizeDelta: {x: 1920, y: 640}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &67012634
@@ -2105,6 +2105,7 @@ GameObject:
   - component: {fileID: 276209207}
   - component: {fileID: 276209206}
   - component: {fileID: 276209205}
+  - component: {fileID: 276209211}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -2498,6 +2499,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &276209211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 276209204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: 2d2a67e8cc3c22c4bb7a3d66e9388863, type: 2}
+  m_BuildHeightMesh: 0
 --- !u!1 &304262497
 GameObject:
   m_ObjectHideFlags: 0
@@ -3040,7 +3072,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2417, y: 111}
+  m_AnchoredPosition: {x: 2417, y: 149}
   m_SizeDelta: {x: 1920, y: 640}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &390759191
@@ -5401,7 +5433,7 @@ MonoBehaviour:
   hungerDepleteAmount: 0
   foodIncreaseAmount: 0
   reticleOn: 0
-  mainSlime: {fileID: 0}
+  mainSlime: {fileID: 3579451242596493928}
   idleBut: {fileID: 0}
   walkBut: {fileID: 0}
   jumpBut: {fileID: 0}
@@ -5409,7 +5441,7 @@ MonoBehaviour:
   damageBut0: {fileID: 0}
   damageBut1: {fileID: 0}
   damageBut2: {fileID: 0}
-  cam: {fileID: 0}
+  cam: {fileID: 963194227}
 --- !u!4 &826454502
 Transform:
   m_ObjectHideFlags: 0
@@ -7156,7 +7188,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh208354
+  m_Name: pb_Mesh50862
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -12872,6 +12904,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2800779792609449319}
     m_Modifications:
+    - target: {fileID: 5144594640820250081, guid: 8760cc9eb30a2b340b14499b6e150dc4, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7099655024501674456, guid: 8760cc9eb30a2b340b14499b6e150dc4, type: 3}
       propertyPath: m_Name
       value: Slime_03 Sprout

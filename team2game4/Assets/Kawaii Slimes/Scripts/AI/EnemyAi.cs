@@ -51,7 +51,8 @@ public class EnemyAi : MonoBehaviour
             case SlimeAnimationState.Idle:
                 
                 if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle")) return;
-                StopAgent();
+                if (agent.isActiveAndEnabled == true)
+                    StopAgent();
                 SetFace(faces.Idleface);
                 break;
 
@@ -64,7 +65,8 @@ public class EnemyAi : MonoBehaviour
 
                 if (walkType == WalkType.ToOrigin)
                 {
-                    agent.SetDestination(originPos);
+                    if (agent.isActiveAndEnabled == true)
+                        agent.SetDestination(originPos);
                     // Debug.Log("WalkToOrg");
                     SetFace(faces.WalkFace);
                     // agent reaches the destination
@@ -83,8 +85,9 @@ public class EnemyAi : MonoBehaviour
                 else
                 {
                     if (waypoints[0] == null) return;
-                   
-                     agent.SetDestination(waypoints[m_CurrentWaypointIndex].position);
+
+                    if (agent.isActiveAndEnabled == true)
+                        agent.SetDestination(waypoints[m_CurrentWaypointIndex].position);
 
                     // agent reaches the destination
                     if (agent.remainingDistance < agent.stoppingDistance)
@@ -103,20 +106,22 @@ public class EnemyAi : MonoBehaviour
                 break;
 
             case SlimeAnimationState.Jump:
-
+                Debug.Log("Jumping");
                 if (animator.GetCurrentAnimatorStateInfo(0).IsName("Jump")) return;
 
-                StopAgent();
+                if (agent.isActiveAndEnabled == true)
+                    StopAgent();
                 SetFace(faces.jumpFace);
                 animator.SetTrigger("Jump");
 
-                //Debug.Log("Jumping");
+                Debug.Log("Jumping");
                 break;
 
             case SlimeAnimationState.Attack:
 
                 if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack")) return;
-                StopAgent();
+                if(agent.isActiveAndEnabled == true)
+                    StopAgent();
                 SetFace(faces.attackFace);
                 animator.SetTrigger("Attack");
 
@@ -130,7 +135,8 @@ public class EnemyAi : MonoBehaviour
                     || animator.GetCurrentAnimatorStateInfo(0).IsName("Damage1")
                     || animator.GetCurrentAnimatorStateInfo(0).IsName("Damage2") ) return;
 
-                StopAgent();
+                if (agent.isActiveAndEnabled == true)
+                    StopAgent();
                 animator.SetTrigger("Damage");
                 animator.SetInteger("DamageType", damType);
                 SetFace(faces.damageFace);
