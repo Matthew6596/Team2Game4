@@ -31,21 +31,23 @@ public class MenuScript : MonoBehaviour
     {
         prevScene = SceneManager.GetActiveScene().name;
         GameManager.gm.stomachMeter = 50;
-        SceneManager.LoadScene(name);
+        ScreenTransition.instance.ChangeScene(name, 0.1f, .4f);
     }
     public void ChangeScene(string name)
     {
         //src.PlayOneShot(btnClickSfx);
         prevScene = SceneManager.GetActiveScene().name;
         gm.stomachMeter = 50;
-        SceneManager.LoadScene(name); 
+        //SceneManager.LoadScene(name); 
+        ScreenTransition.instance.ChangeScene(name, 0.1f, .4f);
     }
     public void ChangeScene(int index)
     {
         //src.PlayOneShot(btnClickSfx);
         prevScene = SceneManager.GetActiveScene().name;
         gm.stomachMeter = 50;
-        SceneManager.LoadScene(index); 
+        //SceneManager.LoadScene(index); 
+        ScreenTransition.instance.ChangeScene(SceneManager.GetSceneByBuildIndex(index).name, 0.1f, .4f);
     }
 
     public void QuitGame()
