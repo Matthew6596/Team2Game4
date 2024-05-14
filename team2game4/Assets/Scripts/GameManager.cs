@@ -63,6 +63,7 @@ public class GameManager : MonoBehaviour
     public Camera cam;
     private void Start()
     {
+        Idle();
         /*
         idleBut.onClick.AddListener( delegate { Idle(); } );
         walkBut.onClick.AddListener(delegate {  ChangeStateTo(SlimeAnimationState.Walk); });
@@ -75,8 +76,8 @@ public class GameManager : MonoBehaviour
     }
     void Idle()
     {
-        LookAtCamera();
-        mainSlime.GetComponent<EnemyAi>().CancelGoNextDestination();
+        //LookAtCamera();
+        //mainSlime.GetComponent<EnemyAi>().CancelGoNextDestination();
         ChangeStateTo(SlimeAnimationState.Idle);
     }
     public void ChangeStateTo(SlimeAnimationState state)
