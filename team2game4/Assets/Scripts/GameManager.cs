@@ -21,6 +21,11 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        if (mainSlime == null)
+        {
+            mainSlime = GameObject.Find("Slime_03 Sprout");
+        }
     }
 
     public MenuScript menuScript;
@@ -82,8 +87,12 @@ public class GameManager : MonoBehaviour
     }
     public void ChangeStateTo(SlimeAnimationState state)
     {
-       if (mainSlime == null) return;    
-       if (state == mainSlime.GetComponent<EnemyAi>().currentState) return;
+        if (mainSlime == null) {
+            Debug.Log("null slime");
+            return; }
+        if (state == mainSlime.GetComponent<EnemyAi>().currentState) {
+            Debug.Log("Already in state");
+            return; }
 
        mainSlime.GetComponent<EnemyAi>().currentState = state ;
     }
