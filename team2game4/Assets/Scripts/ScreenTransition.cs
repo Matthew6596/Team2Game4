@@ -18,7 +18,6 @@ public class ScreenTransition : MonoBehaviour
     void Start()
     {
         offset = 25*((float)Screen.width/800);
-        Debug.Log(offset+", "+Screen.width);
 
         instance = this;
         tween1 = tween2 = tween3 = tween4 = false;
