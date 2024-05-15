@@ -118,20 +118,22 @@ public class GameManager : MonoBehaviour
         }
         yield return null;
 
+
         //Set preset
 
-        if (p == 3) //custom
-        {
-
-        }
-        else
+        if (p != 3) //custom
         {
             DebugMenu.instance.SelectPreset(p);
             DebugMenu.instance.SetGMValues();
+
+            //Reset Scene
+            stomachMeter = 50;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        else
+        {
+            DebugMenu.instance.transform.GetChild(1).gameObject.SetActive(true);
         }
 
-        //Reset Scene
-        stomachMeter = 50;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

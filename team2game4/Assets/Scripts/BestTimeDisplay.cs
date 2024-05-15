@@ -16,6 +16,6 @@ public class BestTimeDisplay : MonoBehaviour
 
     private void Update()
     {
-        bestTimeTxt.transform.rotation = Tween.Wobble(8, 1);
+        if (bestTimeTxt != null) bestTimeTxt.transform.rotation = Tween.Wobble(8, 1);
     }
 }
