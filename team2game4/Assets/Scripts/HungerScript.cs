@@ -15,6 +15,8 @@ public class HungerScript : MonoBehaviour
 
     public static HungerScript instance;
 
+    Transform stomachIcon;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,12 +25,14 @@ public class HungerScript : MonoBehaviour
         instance = this;
         percent = gameObject.GetComponent<TMP_Text>();
         InvokeRepeating("Deplete", 3.0f, depleteRate);
+        stomachIcon = transform.parent;
     }
 
     // Update is called once per frame
     void Update()
     {
         percent.text = gm.stomachMeter.ToString() + "%";
+        stomachIcon.localScale = Tween.LazyTween(stomachIcon.localScale, Vector3.one, 0.04f);
     }
 
     public void Deplete()
@@ -46,7 +50,8 @@ public class HungerScript : MonoBehaviour
         {
             gm.stomachMeter = 0;
         }
-        
+
+        //stomachIcon.localScale = Vector3.one * 0.14f;
     }
 
     public void Increase()
@@ -61,5 +66,7 @@ public class HungerScript : MonoBehaviour
             gm.stomachMeter = 100;
             percent.color = Color.green;
         }
+
+        stomachIcon.localScale = Vector3.one * 1.25f;
     }
 }
