@@ -21,11 +21,6 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        if (mainSlime == null)
-        {
-            mainSlime = GameObject.Find("Slime_03 Sprout");
-        }
     }
 
     public MenuScript menuScript;
@@ -79,6 +74,15 @@ public class GameManager : MonoBehaviour
         damageBut2.onClick.AddListener(delegate { LookAtCamera(); ChangeStateTo(SlimeAnimationState.Damage); mainSlime.GetComponent<EnemyAi>().damType = 2; });
         */
     }
+
+    private void Update()
+    {
+        if (mainSlime == null)
+        {
+            mainSlime = GameObject.Find("Slime_03 Sprout");
+        }
+    }
+
     void Idle()
     {
         //LookAtCamera();
@@ -91,7 +95,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("null slime");
             return; }
         if (state == mainSlime.GetComponent<EnemyAi>().currentState) {
-            Debug.Log("Already in state");
+            //Debug.Log("Already in state");
             return; }
 
        mainSlime.GetComponent<EnemyAi>().currentState = state ;
