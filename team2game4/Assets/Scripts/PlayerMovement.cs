@@ -70,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
                 //gameObject.transform.position = targetPos;
                 src.PlayOneShot(splatSfx);
 
-                Vector3 pos = new Vector3(gameObject.transform.position.x - 5, gameObject.transform.position.y, gameObject.transform.position.z);
+                Vector3 pos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
                 Instantiate(gm.deathVFX, pos, gm.deathVFX.transform.rotation);
 
                 dead = true;
