@@ -106,7 +106,7 @@ public class EnemyAi : MonoBehaviour
                 break;
 
             case SlimeAnimationState.Jump:
-                Debug.Log("Jumping");
+
                 if (animator.GetCurrentAnimatorStateInfo(0).IsName("Jump")) return;
 
                 if (agent.isActiveAndEnabled == true)

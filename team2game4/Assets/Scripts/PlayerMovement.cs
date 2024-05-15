@@ -15,6 +15,9 @@ public class PlayerMovement : MonoBehaviour
 
     Coroutine winCo;
 
+    //New vars
+    bool isMoving = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +49,7 @@ public class PlayerMovement : MonoBehaviour
     {   if(ctx.performed &&!won&&!DebugMenu.instance.mouseOverBtn && !DebugMenu.instance.open)
         {
             Debug.Log("click");
+            Vector3 startPos = gameObject.transform.position;
             gm.ChangeStateTo(SlimeAnimationState.Jump);
             Vector3 targetPos;
             
@@ -53,7 +57,8 @@ public class PlayerMovement : MonoBehaviour
             {
                 Debug.Log("pillarzone");
                 targetPos =  new Vector3(gm.nextPillar.transform.position.x - 1, gm.nextPillar.transform.position.y, 0);
-                gameObject.transform.position = targetPos;
+                StartCoroutine(MoveToTargetPos(startPos));
+                //gameObject.transform.position = targetPos;
                 src.PlayOneShot(splatSfx);
 
                 Vector3 pos = new Vector3(gameObject.transform.position.x - 5, gameObject.transform.position.y, gameObject.transform.position.z);
@@ -67,12 +72,36 @@ public class PlayerMovement : MonoBehaviour
             {
                 Debug.Log("safezone");
                 src.PlayOneShot(foodGetSfx);
-                targetPos = gm.nextOpening.transform.position;
-                gameObject.transform.position = targetPos;
+                targetPos = gm.targetCollidingObj.transform.position;
+                StartCoroutine(MoveToTargetPos(startPos));
+                //gameObject.transform.position = targetPos;
             }
 
             PillarSpawn.instance.MovePillars();
         }
+    }
+
+    IEnumerator MoveToTargetPos(Vector3 startPos)
+    {
+        if(isMoving)
+        {
+            yield break;
+        }
+
+        Vector3 targetPos = new Vector3(gameObject.transform.position.x, gm.targetCollidingObj.transform.position.y, gm.targetCollidingObj.transform.position.z);
+
+        isMoving = true;
+
+        float ctr = 0;
+
+        while (ctr < 0.75f)
+        {
+            ctr += Time.deltaTime;
+            gameObject.transform.position = Vector3.Lerp(startPos, targetPos, ctr / 0.75f);
+            yield return null;
+        }
+
+        isMoving = false;
     }
 
     IEnumerator GameOver()
