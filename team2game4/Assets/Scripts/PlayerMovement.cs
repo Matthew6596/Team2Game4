@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
 
     //New vars
     bool isMoving = false;
+    public float duration = 1.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -56,16 +57,16 @@ public class PlayerMovement : MonoBehaviour
     public void Jump(InputAction.CallbackContext ctx)
     {   if(ctx.performed &&!won&&!DebugMenu.instance.mouseOverBtn && !DebugMenu.instance.open)
         {
+            gm.ChangeStateTo(SlimeAnimationState.Jump);
             Debug.Log("click");
             Vector3 startPos = gameObject.transform.position;
-            gm.ChangeStateTo(SlimeAnimationState.Jump);
             Vector3 targetPos;
             
             if (gm.targetCollidingObj == gm.nextPillar)
             {
                 Debug.Log("pillarzone");
-                targetPos =  new Vector3(gm.nextPillar.transform.position.x - 1, gm.nextPillar.transform.position.y, 0);
-                StartCoroutine(MoveToTargetPos(startPos));
+                targetPos =  new Vector3(gameObject.transform.position.x - 1, gm.nextPillar.transform.position.y, 0);
+                StartCoroutine(MoveToTargetPos(startPos, targetPos));
                 //gameObject.transform.position = targetPos;
                 src.PlayOneShot(splatSfx);
 
@@ -80,8 +81,8 @@ public class PlayerMovement : MonoBehaviour
             {
                 Debug.Log("safezone");
                 src.PlayOneShot(foodGetSfx);
-                targetPos = gm.targetCollidingObj.transform.position;
-                StartCoroutine(MoveToTargetPos(startPos));
+                targetPos = new Vector3(gameObject.transform.position.x, gm.nextOpening.transform.position.y, gm.nextOpening.transform.position.z);
+                StartCoroutine(MoveToTargetPos(startPos, targetPos));
                 //gameObject.transform.position = targetPos;
             }
 
@@ -89,23 +90,33 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    IEnumerator MoveToTargetPos(Vector3 startPos)
+    IEnumerator MoveToTargetPos(Vector3 startPos, Vector3 targetPos)
     {
         if(isMoving)
         {
             yield break;
         }
 
-        Vector3 targetPos = new Vector3(gameObject.transform.position.x, gm.targetCollidingObj.transform.position.y, gm.targetCollidingObj.transform.position.z);
-
         isMoving = true;
+
+        float xDifference = Mathf.Abs(targetPos.x - startPos.x);
+        float yDifference = Mathf.Abs(targetPos.y - startPos.y);
+
+        if(xDifference > yDifference)
+        {
+            duration -= xDifference/100;
+        }
+        else
+        {
+            duration -= yDifference/100;
+        }
 
         float ctr = 0;
 
-        while (ctr < 0.75f)
+        while (ctr < duration)
         {
             ctr += Time.deltaTime;
-            gameObject.transform.position = Vector3.Lerp(startPos, targetPos, ctr / 0.75f);
+            gameObject.transform.position = Vector3.Lerp(startPos, targetPos, ctr / duration);
             yield return null;
         }
 
