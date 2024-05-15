@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -15,12 +15,18 @@ public class PlayerMovement : MonoBehaviour
 
     Coroutine winCo;
 
+    public GameObject flashImgObj;
+    Image flashImgRenderer;
+
     // Start is called before the first frame update
     void Start()
     {
         gm = GameManager.gm;
         inp = GetComponent<PlayerInput>();
         src = GetComponent<AudioSource>();
+
+        flashImgRenderer = flashImgObj.GetComponent<Image>();
+        flashImgRenderer.color = new Color(255, 255, 255, 0);
     }
 
     // Update is called once per frame
@@ -40,6 +46,8 @@ public class PlayerMovement : MonoBehaviour
                 winCo = StartCoroutine("Win");
         }
         if (dead && inp.enabled) inp.enabled = false;
+
+        flashImgRenderer.color = new Color(255, 255, 255, Tween.LazyTween(flashImgRenderer.color.a,0,0.04f));
     }
 
     public void Jump(InputAction.CallbackContext ctx)
@@ -78,6 +86,7 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator GameOver()
     {
         src.PlayOneShot(deathSFX);
+        flashImgRenderer.color = new Color(255, 255, 255, 1f);
 
         inp.enabled = false;
         gm.prevTime = TimeTracker.instance.time; //don't set best time, didn't win
