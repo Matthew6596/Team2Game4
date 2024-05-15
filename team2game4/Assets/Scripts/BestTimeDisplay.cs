@@ -13,4 +13,9 @@ public class BestTimeDisplay : MonoBehaviour
         if (bestTimeTxt != null) bestTimeTxt.text += TimeTracker.FloatToString(GameManager.gm.bestSessionTime);
         if (prevTimeTxt != null) prevTimeTxt.text += TimeTracker.FloatToString(GameManager.gm.prevTime);
     }
+
+    private void Update()
+    {
+        bestTimeTxt.transform.rotation = Tween.Wobble(8, 1);
+    }
 }
