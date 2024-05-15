@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -15,8 +15,8 @@ public class PlayerMovement : MonoBehaviour
 
     Coroutine winCo;
 
-    public GameObject flashImgObj;
-    Image flashImgRenderer;
+    //New vars
+    bool isMoving = false;
 
     // Start is called before the first frame update
     void Start()
@@ -24,9 +24,6 @@ public class PlayerMovement : MonoBehaviour
         gm = GameManager.gm;
         inp = GetComponent<PlayerInput>();
         src = GetComponent<AudioSource>();
-
-        flashImgRenderer = flashImgObj.GetComponent<Image>();
-        flashImgRenderer.color = new Color(255, 255, 255, 0);
     }
 
     // Update is called once per frame
@@ -46,14 +43,13 @@ public class PlayerMovement : MonoBehaviour
                 winCo = StartCoroutine("Win");
         }
         if (dead && inp.enabled) inp.enabled = false;
-
-        flashImgRenderer.color = new Color(255, 255, 255, Tween.LazyTween(flashImgRenderer.color.a,0,0.04f));
     }
 
     public void Jump(InputAction.CallbackContext ctx)
     {   if(ctx.performed &&!won&&!DebugMenu.instance.mouseOverBtn && !DebugMenu.instance.open)
         {
             Debug.Log("click");
+            Vector3 startPos = gameObject.transform.position;
             gm.ChangeStateTo(SlimeAnimationState.Jump);
             Vector3 targetPos;
             
@@ -61,7 +57,8 @@ public class PlayerMovement : MonoBehaviour
             {
                 Debug.Log("pillarzone");
                 targetPos =  new Vector3(gm.nextPillar.transform.position.x - 1, gm.nextPillar.transform.position.y, 0);
-                gameObject.transform.position = targetPos;
+                StartCoroutine(MoveToTargetPos(startPos));
+                //gameObject.transform.position = targetPos;
                 src.PlayOneShot(splatSfx);
 
                 Vector3 pos = new Vector3(gameObject.transform.position.x - 5, gameObject.transform.position.y, gameObject.transform.position.z);
@@ -75,18 +72,41 @@ public class PlayerMovement : MonoBehaviour
             {
                 Debug.Log("safezone");
                 src.PlayOneShot(foodGetSfx);
-                targetPos = gm.nextOpening.transform.position;
-                gameObject.transform.position = targetPos;
+                targetPos = gm.targetCollidingObj.transform.position;
+                StartCoroutine(MoveToTargetPos(startPos));
+                //gameObject.transform.position = targetPos;
             }
 
             PillarSpawn.instance.MovePillars();
         }
     }
 
+    IEnumerator MoveToTargetPos(Vector3 startPos)
+    {
+        if(isMoving)
+        {
+            yield break;
+        }
+
+        Vector3 targetPos = new Vector3(gameObject.transform.position.x, gm.targetCollidingObj.transform.position.y, gm.targetCollidingObj.transform.position.z);
+
+        isMoving = true;
+
+        float ctr = 0;
+
+        while (ctr < 0.75f)
+        {
+            ctr += Time.deltaTime;
+            gameObject.transform.position = Vector3.Lerp(startPos, targetPos, ctr / 0.75f);
+            yield return null;
+        }
+
+        isMoving = false;
+    }
+
     IEnumerator GameOver()
     {
         src.PlayOneShot(deathSFX);
-        flashImgRenderer.color = new Color(255, 255, 255, 1f);
 
         inp.enabled = false;
         gm.prevTime = TimeTracker.instance.time; //don't set best time, didn't win
