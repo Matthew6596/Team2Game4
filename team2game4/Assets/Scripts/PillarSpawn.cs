@@ -123,11 +123,12 @@ public class PillarSpawn : MonoBehaviour
         if (!pillarMoving)
         {
             //Making sure each pillar ends in *exact* correct position
-            float[] endPositions = new float[Pillars.Count+2];
+            float[] endPositions = new float[Pillars.Count+3];
             for (int i = 0; i < Pillars.Count; i++) endPositions[i] = Pillars[i].transform.position.x - horizontalSpacing;
             //endPositions[Pillars.Count] = player.transform.position.x - horizontalSpacing;
             endPositions[Pillars.Count + 0] = planes[0].transform.position.x - horizontalSpacing;
             endPositions[Pillars.Count + 1] = planes[1].transform.position.x - horizontalSpacing;
+            endPositions[Pillars.Count + 2] = planes[2].transform.position.x - horizontalSpacing;
 
 
             //Move Pillars
@@ -135,10 +136,12 @@ public class PillarSpawn : MonoBehaviour
             //Pillars.Add(player);
             Pillars.Add(planes[0]);
             Pillars.Add(planes[1]);
+            Pillars.Add(planes[2]);
             StartCoroutine(movePillars(Pillars.ToArray(),endPositions));
             //Pillars.Remove(player);
             Pillars.Remove(planes[0]);
             Pillars.Remove(planes[1]);
+            Pillars.Remove(planes[2]);
 
             pillarMoving = true; //set bool to prevent spam
         }
