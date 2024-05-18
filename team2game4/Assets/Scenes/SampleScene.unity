@@ -7453,6 +7453,7 @@ MonoBehaviour:
   depleteBy: 1
   increaseAmount: 5
   hungerBar: {fileID: 1721849777}
+  hungerIcon: {fileID: 1695341829}
   depleteActive: 1
 --- !u!114 &1107627065
 MonoBehaviour:

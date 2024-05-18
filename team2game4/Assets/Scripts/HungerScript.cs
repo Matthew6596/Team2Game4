@@ -16,8 +16,9 @@ public class HungerScript : MonoBehaviour
 
     public static HungerScript instance;
 
-    Transform stomachIcon;
+    Transform hungerParent;
     public Image hungerBar;
+    public Transform hungerIcon;
 
     public bool depleteActive=true;
 
@@ -29,18 +30,31 @@ public class HungerScript : MonoBehaviour
         instance = this;
         percent = gameObject.GetComponent<TMP_Text>();
         InvokeRepeating("Deplete", 3.0f, depleteRate);
-        stomachIcon = transform.parent;
+        hungerParent = transform.parent;
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Percent text
         percent.text = gm.stomachMeter.ToString() + "%";
-        float fillPercent = gm.stomachMeter / 100f;
-        stomachIcon.localScale = Tween.LazyTween(stomachIcon.localScale, Vector3.one, 0.04f);
-        hungerBar.fillAmount = Tween.LazyTween(hungerBar.fillAmount, fillPercent, 0.04f);
+
+        //Make UI naturally go to normal scale
+        hungerParent.localScale = Tween.LazyTween(hungerParent.localScale, Vector3.one, 0.04f);
+        hungerIcon.localScale = Tween.LazyTween(hungerIcon.localScale, Vector3.one* 0.175f, 0.04f);
+        transform.localScale = Tween.LazyTween(transform.localScale, Vector3.one, 0.04f);
+
+        //Bar fill tweens
+        hungerBar.fillAmount = Tween.LazyTween(hungerBar.fillAmount, gm.stomachMeter / 100f, 0.04f);
+        
+        //Wobble when low
+        hungerParent.rotation = Tween.Wobble(10, HungerSeverityPercent()*45);
+    }
+
+    public float HungerSeverityPercent()
+    {
         //I'd like to thank desmos for the seemingly random numbers and math going on here
-        stomachIcon.rotation = Tween.Wobble(10, ((float)Math.Pow(1-fillPercent-.3,7))*45);
+        return ((float)Math.Pow(1 - (gm.stomachMeter / 100f) - .3, 7));
     }
 
     public void Deplete()
@@ -60,6 +74,14 @@ public class HungerScript : MonoBehaviour
             {
                 gm.stomachMeter = 0;
             }
+
+            if (HungerSeverityPercent() * 120 > 1)
+            {
+                hungerIcon.localScale = Vector3.one * .22f;
+                transform.localScale = Vector3.one * 1.26f;
+                //Play the "Bomp, bomp, bomp" sfx
+
+            }
         }
 
         //stomachIcon.localScale = Vector3.one * 0.14f;
@@ -78,6 +100,6 @@ public class HungerScript : MonoBehaviour
             percent.color = Color.green;
         }
 
-        stomachIcon.localScale = Vector3.one * 1.25f;
+        hungerParent.localScale = Vector3.one * 1.25f;
     }
 }
