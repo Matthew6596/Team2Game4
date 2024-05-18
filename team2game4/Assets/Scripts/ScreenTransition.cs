@@ -54,6 +54,8 @@ public class ScreenTransition : MonoBehaviour
         SceneManager.LoadScene(sceneName);
         yield return new WaitForSeconds(t);
 
+        GameManager.gm.stomachMeter = 50;
+
         tween1 = false;
         yield return new WaitForSeconds(t);
         tween2 = false;

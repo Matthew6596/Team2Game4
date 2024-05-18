@@ -30,14 +30,14 @@ public class MenuScript : MonoBehaviour
     public static void changeScene(string name)
     {
         prevScene = SceneManager.GetActiveScene().name;
-        GameManager.gm.stomachMeter = 50;
+        
         ScreenTransition.instance.ChangeScene(name, 0.1f, .4f);
     }
     public void ChangeScene(string name)
     {
         //src.PlayOneShot(btnClickSfx);
         prevScene = SceneManager.GetActiveScene().name;
-        gm.stomachMeter = 50;
+        //gm.stomachMeter = 50;
         //SceneManager.LoadScene(name); 
         ScreenTransition.instance.ChangeScene(name, 0.1f, .4f);
     }
@@ -45,7 +45,7 @@ public class MenuScript : MonoBehaviour
     {
         //src.PlayOneShot(btnClickSfx);
         prevScene = SceneManager.GetActiveScene().name;
-        gm.stomachMeter = 50;
+        //gm.stomachMeter = 50;
         //SceneManager.LoadScene(index); 
         ScreenTransition.instance.ChangeScene(SceneManager.GetSceneByBuildIndex(index).name, 0.1f, .4f);
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System;
 
 public class HungerScript : MonoBehaviour
 {
@@ -35,8 +36,11 @@ public class HungerScript : MonoBehaviour
     void Update()
     {
         percent.text = gm.stomachMeter.ToString() + "%";
+        float fillPercent = gm.stomachMeter / 100f;
         stomachIcon.localScale = Tween.LazyTween(stomachIcon.localScale, Vector3.one, 0.04f);
-        hungerBar.fillAmount = Tween.LazyTween(hungerBar.fillAmount, gm.stomachMeter / 100f, 0.04f);
+        hungerBar.fillAmount = Tween.LazyTween(hungerBar.fillAmount, fillPercent, 0.04f);
+        //I'd like to thank desmos for the seemingly random numbers and math going on here
+        stomachIcon.rotation = Tween.Wobble(10, ((float)Math.Pow(1-fillPercent-.3,7))*45);
     }
 
     public void Deplete()
