@@ -125,6 +125,7 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator GameOver()
     {
+        HungerScript.instance.depleteActive = false;
         src.PlayOneShot(deathSFX);
         flashImgRenderer.color = new Color(255, 255, 255, 1);
 
@@ -137,6 +138,7 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator Win()
     {
+        HungerScript.instance.depleteActive = false;
         src.PlayOneShot(winSFX);
 
         inp.enabled = false; won = true;

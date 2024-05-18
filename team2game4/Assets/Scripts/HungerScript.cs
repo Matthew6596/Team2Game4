@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using Unity.VisualScripting;
+using UnityEngine.UI;
 
 public class HungerScript : MonoBehaviour
 {
@@ -16,6 +16,9 @@ public class HungerScript : MonoBehaviour
     public static HungerScript instance;
 
     Transform stomachIcon;
+    public Image hungerBar;
+
+    public bool depleteActive=true;
 
     // Start is called before the first frame update
     void Start()
@@ -33,22 +36,26 @@ public class HungerScript : MonoBehaviour
     {
         percent.text = gm.stomachMeter.ToString() + "%";
         stomachIcon.localScale = Tween.LazyTween(stomachIcon.localScale, Vector3.one, 0.04f);
+        hungerBar.fillAmount = Tween.LazyTween(hungerBar.fillAmount, gm.stomachMeter / 100f, 0.04f);
     }
 
     public void Deplete()
     {
-        percent.color = Color.white;
-        if (gm.stomachMeter > 0)
+        if (depleteActive)
         {
-            gm.stomachMeter = gm.stomachMeter - depleteBy;
-        }
-        else if(gm.stomachMeter >= 100)
-        {
-            gm.stomachMeter = 100;
-        }
-        else
-        {
-            gm.stomachMeter = 0;
+            percent.color = Color.white;
+            if (gm.stomachMeter > 0)
+            {
+                gm.stomachMeter = gm.stomachMeter - depleteBy;
+            }
+            else if (gm.stomachMeter >= 100)
+            {
+                gm.stomachMeter = 100;
+            }
+            else
+            {
+                gm.stomachMeter = 0;
+            }
         }
 
         //stomachIcon.localScale = Vector3.one * 0.14f;
