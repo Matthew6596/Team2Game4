@@ -10,12 +10,26 @@ public class MenuScript : MonoBehaviour
     public AudioClip btnHoverSfx,btnClickSfx;
     AudioSource src;
 
+    public Transform creditsPanel;
+    public Transform creditsStartLocation;
+    Vector3 creditsEndLocation;
+    bool creditsOn = false;
+
     GameManager gm;
     private void Start()
     {
+        creditsPanel.gameObject.SetActive(true);
+        creditsEndLocation = creditsPanel.localPosition;
+        creditsPanel.localPosition = creditsStartLocation.localPosition;
         src = GetComponent<AudioSource>();
         gm = GameManager.gm;
         gm.menuScript = this;
+    }
+
+    private void Update()
+    {
+        creditsPanel.localPosition = 
+            Tween.LazyTween(creditsPanel.localPosition, (creditsOn) ? (creditsEndLocation) : (creditsStartLocation.localPosition), 0.1f);
     }
 
     public void MouseLeftClick(InputAction.CallbackContext ctx)
@@ -78,5 +92,10 @@ public class MenuScript : MonoBehaviour
     public void ClosePopup(GameObject _group)
     {
         _group.SetActive(false);
+    }
+
+    public void ToggleCredits(bool on)
+    {
+        creditsOn = on;
     }
 }
