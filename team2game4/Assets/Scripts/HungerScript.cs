@@ -22,12 +22,16 @@ public class HungerScript : MonoBehaviour
 
     public bool depleteActive=true;
 
+    AudioSource src;
+    public AudioClip bompSfx;
+
     // Start is called before the first frame update
     void Start()
     {
         gm = GameManager.gm;
         gm.hungerScript = this;
         instance = this;
+        src = GetComponent<AudioSource>();
         percent = gameObject.GetComponent<TMP_Text>();
         InvokeRepeating("Deplete", 3.0f, depleteRate);
         hungerParent = transform.parent;
@@ -80,7 +84,7 @@ public class HungerScript : MonoBehaviour
                 hungerIcon.localScale = Vector3.one * .22f;
                 transform.localScale = Vector3.one * 1.26f;
                 //Play the "Bomp, bomp, bomp" sfx
-
+                src.PlayOneShot(bompSfx,2f);
             }
         }
 
