@@ -8333,40 +8333,34 @@ MonoBehaviour:
       m_Calls: []
   m_text: '
 
-    
 
     ---Foodpacker Font (Title)---
 
     Awan Senja
 
-    
 
-    ---Pink
-    Chicken Font---
+    ---Pink Chicken
+    Font---
 
     Scratch Design
 
-    
 
     ---Stomach Icon Image---
 
-    SVG
-    Repo
+    SVG Repo
 
-    
 
-    ---UI Button Textures---
+    ---UI
+    Button Textures---
 
     KartInnka
 
-    
 
-    ---Box
+    ---Box Texture---
+
+
+    ---Splat Particle
     Texture---
-
-    
-
-    ---Splat Particle Texture---
 
 '
   m_isRightToLeft: 0
