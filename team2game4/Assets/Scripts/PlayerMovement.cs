@@ -123,10 +123,17 @@ public class PlayerMovement : MonoBehaviour
 
         isMoving = false;
 
-        if(isSafeT)
+        if(isSafeT) //Food collect feedback
         {
+            PlayerSqaushStretch.Instance.FoodCollect();
+
             Vector3 particlePos = new Vector3(gameObject.transform.position.x + 0.5f, gameObject.transform.position.y, gameObject.transform.position.z);
             Instantiate(gm.foodVFX, particlePos, gm.mainSlime.transform.rotation);
+        }
+        else //Pillar hit feedback
+        {
+            //Function is Empty right now, you don't have to use this if you don't want
+            PlayerSqaushStretch.Instance.PillarHit();
         }
     }
 
