@@ -22,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
     bool isMoving = false;
     public float duration = 1.0f;
 
+    Vector3 targetPos; //made this global
+
     // Start is called before the first frame update
     void Start()
     {
@@ -60,7 +62,6 @@ public class PlayerMovement : MonoBehaviour
             gm.ChangeStateTo(SlimeAnimationState.Jump);
             Debug.Log("click");
             Vector3 startPos = gameObject.transform.position;
-            Vector3 targetPos;
             
             if (gm.targetCollidingObj == gm.nextPillar)
             {
@@ -102,17 +103,11 @@ public class PlayerMovement : MonoBehaviour
 
         isMoving = true;
 
-        float xDifference = Mathf.Abs(targetPos.x - startPos.x);
+        //float xDifference = Mathf.Abs(targetPos.x - startPos.x);
         float yDifference = Mathf.Abs(targetPos.y - startPos.y);
 
-        if(xDifference > yDifference)
-        {
-            duration -= xDifference/100;
-        }
-        else
-        {
-            duration -= yDifference/100;
-        }
+        //duration -= yDifference/100;
+        duration = PillarSpawn.instance.horizontalSpacing / PillarSpawn.instance.moveSpeed;
 
         float ctr = 0;
 
@@ -152,14 +147,26 @@ public class PlayerMovement : MonoBehaviour
         MenuScript.changeScene("WinScene");
     }
 
-    /*
     private void OnTriggerEnter(Collider other)
     {
 
-        if(other.gameObject.CompareTag("SafeZone") || other.gameObject.CompareTag("Food"))
+        if(other.gameObject.CompareTag("Pillar"))
         {
-            
+            Vector3 pos = gameObject.transform.position;
+            if (gameObject.transform.position.y > targetPos.y)
+            {
+                pos.y--;
+                gameObject.transform.position = pos;
+                //pos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - 1, gameObject.transform.position.z);
+            }
+            else if (gameObject.transform.position.y < targetPos.y)
+            {
+                pos.y++;
+                gameObject.transform.position = pos;
+                //pos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1, gameObject.transform.position.z);
+            }
+
         }
     }
-    */
+
 }
