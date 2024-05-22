@@ -201,8 +201,8 @@ public class PillarSpawn : MonoBehaviour
                 GameObject c = p.GetChild(i).gameObject;
                 if (c.CompareTag("SafeZone"))
                 {
-                    Vector3 pos = new Vector3(p.transform.position.x - 5, c.transform.position.y, c.transform.position.z);
-                    Instantiate(gm.foodVFX, pos, c.transform.rotation);
+                    //Vector3 pos = new Vector3(p.transform.position.x - 5, c.transform.position.y, c.transform.position.z);
+                    //Instantiate(gm.foodVFX, pos, gm.mainSlime.transform.rotation);
                     //make particle here maybe
                     Destroy(c);
                 }

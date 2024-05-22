@@ -119,6 +119,9 @@ public class PlayerMovement : MonoBehaviour
         }
 
         isMoving = false;
+
+        Vector3 particlePos = new Vector3(gameObject.transform.position.x + 0.5f, gameObject.transform.position.y, gameObject.transform.position.z);
+        Instantiate(gm.foodVFX, particlePos, gm.mainSlime.transform.rotation);
     }
 
     IEnumerator GameOver()
