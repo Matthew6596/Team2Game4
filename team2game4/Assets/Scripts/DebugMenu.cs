@@ -118,7 +118,8 @@ public class DebugMenu : MonoBehaviour
         if(!open)
         {
             gm.stomachMeter = 50;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            GameManager.gm.StartWithPreset(3);
         }
             
     }

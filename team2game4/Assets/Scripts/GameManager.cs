@@ -111,6 +111,13 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator setPreset(int p)
     {
+        if (SceneManager.GetActiveScene().name == "SampleScene" && p == 3)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            yield return null;
+            DebugMenu.instance.transform.GetChild(1).gameObject.SetActive(true);
+        }
+
         //Wait till scene is on sample scene (debug menu is only on sample scene)
         while (SceneManager.GetActiveScene().name != "SampleScene")
         {
@@ -121,7 +128,7 @@ public class GameManager : MonoBehaviour
 
         //Set preset
 
-        if (p != 3) //custom
+        if (p != 3) //not custom
         {
             DebugMenu.instance.SelectPreset(p);
             DebugMenu.instance.SetGMValues();
