@@ -14,6 +14,8 @@ public class TransformTweenOn : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (!startTransform.gameObject.activeSelf) return;
+
         //Temp transform to swap
         GameObject g = new();
         Transform t = g.transform;
