@@ -8358,12 +8358,13 @@ MonoBehaviour:
 
     ---Box Texture---
 
+    Bannosuke
 
 
-    ---Splat Particle
-    Texture---
+    ---Splat
+    Particle Texture---
 
-'
+    ncgracie'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 32ea58cd6f2dbcc42886bf5b937f83ad, type: 2}
   m_sharedMaterial: {fileID: -3061931950066060048, guid: 32ea58cd6f2dbcc42886bf5b937f83ad, type: 2}
