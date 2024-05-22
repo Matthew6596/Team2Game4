@@ -92,7 +92,10 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator MoveToTargetPos(Vector3 startPos, Vector3 targetPos)
     {
-        if(isMoving)
+        //Movement Code based on code by Programmer on StackOverflow
+        //https://stackoverflow.com/questions/36850253/move-gameobject-over-time/36851965#36851965
+
+        if (isMoving)
         {
             yield break;
         }
