@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -14058,7 +14058,7 @@ MonoBehaviour:
   splatSfx: {fileID: 8300000, guid: bce76c6a77496d74cb7a05c7b4f46caf, type: 3}
   foodGetSfx: {fileID: 8300000, guid: 81e00fb450c36c44f96824d6cfe47be1, type: 3}
   winSFX: {fileID: 8300000, guid: 044bcab526efdc54ba13c18812a39941, type: 3}
-  deathSFX: {fileID: 8300000, guid: 410d6b31b8382724b827c69e9536ca10, type: 3}
+  deathSFX: {fileID: 8300000, guid: a3aeb008f70b0c64c9e29930c0f8274e, type: 3}
   flashImgObj: {fileID: 388604079}
   duration: 1
 --- !u!114 &5529954180915873286
