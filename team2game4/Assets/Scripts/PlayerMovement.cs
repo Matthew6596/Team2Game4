@@ -159,7 +159,7 @@ public class PlayerMovement : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        if(other.gameObject.CompareTag("Pillar"))
+        /*if(other.gameObject.CompareTag("Pillar"))
         {
             Vector3 pos = gameObject.transform.position;
             if (gameObject.transform.position.y > targetPos.y)
@@ -175,7 +175,7 @@ public class PlayerMovement : MonoBehaviour
                 //pos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1, gameObject.transform.position.z);
             }
 
-        }
+        }*/
     }
 
 }
