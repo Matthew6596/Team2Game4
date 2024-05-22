@@ -62,12 +62,14 @@ public class PlayerMovement : MonoBehaviour
             gm.ChangeStateTo(SlimeAnimationState.Jump);
             Debug.Log("click");
             Vector3 startPos = gameObject.transform.position;
+            bool isSafe;
             
             if (gm.targetCollidingObj == gm.nextPillar)
             {
                 Debug.Log("pillarzone");
+                isSafe = false;
                 targetPos =  new Vector3(gameObject.transform.position.x - 1, gm.nextPillar.transform.position.y, 0);
-                StartCoroutine(MoveToTargetPos(startPos, targetPos));
+                StartCoroutine(MoveToTargetPos(startPos, targetPos, isSafe));
                 //gameObject.transform.position = targetPos;
                 src.PlayOneShot(splatSfx);
 
@@ -81,9 +83,10 @@ public class PlayerMovement : MonoBehaviour
             else if (gm.targetCollidingObj == gm.nextOpening)
             {
                 Debug.Log("safezone");
+                isSafe = true;
                 src.PlayOneShot(foodGetSfx);
                 targetPos = new Vector3(gameObject.transform.position.x, gm.nextOpening.transform.position.y, gm.nextOpening.transform.position.z);
-                StartCoroutine(MoveToTargetPos(startPos, targetPos));
+                StartCoroutine(MoveToTargetPos(startPos, targetPos, isSafe));
                 //gameObject.transform.position = targetPos;
             }
 
@@ -91,7 +94,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    IEnumerator MoveToTargetPos(Vector3 startPos, Vector3 targetPos)
+    IEnumerator MoveToTargetPos(Vector3 startPos, Vector3 targetPos, bool isSafeT)
     {
         //Movement Code based on code by Programmer on StackOverflow
         //https://stackoverflow.com/questions/36850253/move-gameobject-over-time/36851965#36851965
@@ -120,8 +123,11 @@ public class PlayerMovement : MonoBehaviour
 
         isMoving = false;
 
-        Vector3 particlePos = new Vector3(gameObject.transform.position.x + 0.5f, gameObject.transform.position.y, gameObject.transform.position.z);
-        Instantiate(gm.foodVFX, particlePos, gm.mainSlime.transform.rotation);
+        if(isSafeT)
+        {
+            Vector3 particlePos = new Vector3(gameObject.transform.position.x + 0.5f, gameObject.transform.position.y, gameObject.transform.position.z);
+            Instantiate(gm.foodVFX, particlePos, gm.mainSlime.transform.rotation);
+        }
     }
 
     IEnumerator GameOver()
