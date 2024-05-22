@@ -18,9 +18,12 @@ public class MenuScript : MonoBehaviour
     GameManager gm;
     private void Start()
     {
-        creditsPanel.gameObject.SetActive(true);
-        creditsEndLocation = creditsPanel.localPosition;
-        creditsPanel.localPosition = creditsStartLocation.localPosition;
+        if (creditsPanel != null)
+        {
+            creditsPanel.gameObject.SetActive(true);
+            creditsEndLocation = creditsPanel.localPosition;
+            creditsPanel.localPosition = creditsStartLocation.localPosition;
+        }
         src = GetComponent<AudioSource>();
         gm = GameManager.gm;
         gm.menuScript = this;
@@ -28,7 +31,8 @@ public class MenuScript : MonoBehaviour
 
     private void Update()
     {
-        creditsPanel.localPosition = 
+        if(creditsPanel!=null)
+            creditsPanel.localPosition = 
             Tween.LazyTween(creditsPanel.localPosition, (creditsOn) ? (creditsEndLocation) : (creditsStartLocation.localPosition), 0.1f);
     }
 
