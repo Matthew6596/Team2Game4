@@ -171,7 +171,7 @@ public class PlayerMovement : MonoBehaviour
 
         inp.enabled = false; won = true;
         gm.prevTime = TimeTracker.instance.time;
-        if (gm.prevTime < gm.bestSessionTime) gm.bestSessionTime = gm.prevTime; //Smaller/Faster time is better
+        if (gm.prevTime < gm.bestSessionTime) gm.SetBestTime(); //Smaller/Faster time is better
 
         yield return new WaitForSeconds(2);
         MenuScript.changeScene("WinScene");

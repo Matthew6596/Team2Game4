@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     public float prevTime =float.MaxValue;
     public int lastSelectedGamemode;
     public float bestSessionTime => bestSessionTimes[lastSelectedGamemode];
+    public void SetBestTime() { bestSessionTimes[lastSelectedGamemode] = prevTime; }
 
     public GameObject foodVFX;
     public GameObject deathVFX;
