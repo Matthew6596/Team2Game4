@@ -27,8 +27,11 @@ public class GameManager : MonoBehaviour
     public HungerScript hungerScript;
     public int stomachMeter = 50;
 
-    public float bestSessionTime=float.MaxValue;
-    public float prevTime=float.MaxValue;
+    //4 times, best for easy, standard, evil, and custom
+    public float[] bestSessionTimes = new float[] { float.MaxValue, float.MaxValue, float.MaxValue, float.MaxValue };
+    public float prevTime =float.MaxValue;
+    public int lastSelectedGamemode;
+    public float bestSessionTime => bestSessionTimes[lastSelectedGamemode];
 
     public GameObject foodVFX;
     public GameObject deathVFX;
