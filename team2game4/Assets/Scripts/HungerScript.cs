@@ -79,7 +79,7 @@ public class HungerScript : MonoBehaviour
                 gm.stomachMeter = 0;
             }
 
-            if (HungerSeverityPercent() * 120 > 1)
+            if (HungerSeverityPercent() * 120 > 1 && gm.stomachMeter<50)
             {
                 hungerIcon.localScale = Vector3.one * .22f;
                 transform.localScale = Vector3.one * 1.26f;

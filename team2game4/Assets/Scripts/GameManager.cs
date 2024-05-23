@@ -115,6 +115,7 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator setPreset(int p)
     {
+        lastSelectedGamemode = p;
         if (SceneManager.GetActiveScene().name == "SampleScene" && p == 3)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
