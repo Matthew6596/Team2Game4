@@ -24,6 +24,8 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 targetPos; //made this global
 
+    bool isFirstJump = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -129,11 +131,23 @@ public class PlayerMovement : MonoBehaviour
 
             Vector3 particlePos = new Vector3(gameObject.transform.position.x + 0.5f, gameObject.transform.position.y, gameObject.transform.position.z);
             Instantiate(gm.foodVFX, particlePos, gm.mainSlime.transform.rotation);
+
+            //Remember what the turn speed was on first jump, before increasing it
+            if (isFirstJump) {
+                AimingScript.instance.initialTurnSpeed = AimingScript.instance.turnSpeed;
+                isFirstJump = false;
+            }
+
+            TargetScript.instance.IncreaseTurnSpeed(1); //Every time player jumps, aim line turn speed increases
         }
         else //Pillar hit feedback
         {
             //Function is Empty right now, you don't have to use this if you don't want
             PlayerSqaushStretch.Instance.PillarHit();
+
+            //Reset turn speed when player die
+            AimingScript.instance.turnSpeed = AimingScript.instance.initialTurnSpeed;
+            isFirstJump = true;
         }
     }
 

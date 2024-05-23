@@ -12,6 +12,7 @@ public class AimingScript : MonoBehaviour
     public float turnSpeed;
     public float safeZoneSlowDown;
     public float turnSpeedIncrease;
+    public float initialTurnSpeed;
 
     public Transform player;
 
