@@ -15,6 +15,9 @@ public class MenuScript : MonoBehaviour
     Vector3 creditsEndLocation;
     bool creditsOn = false;
 
+    Image pauseBtnImg;
+    public Sprite pauseSprite,resumeSprite;
+
     GameManager gm;
     private void Start()
     {
@@ -24,6 +27,7 @@ public class MenuScript : MonoBehaviour
             creditsEndLocation = creditsPanel.localPosition;
             creditsPanel.localPosition = creditsStartLocation.localPosition;
         }
+        pauseBtnImg = GetComponent<Image>();
         src = GetComponent<AudioSource>();
         gm = GameManager.gm;
         gm.menuScript = this;
@@ -103,12 +107,30 @@ public class MenuScript : MonoBehaviour
         creditsOn = on;
     }
 
-    public void PauseGame()
+    public void PauseToggle(GameObject _pauseScrn)
     {
-        Time.timeScale = 0;
-    }
-    public void UnpauseGame()
-    {
-        Time.timeScale = 1;
+        bool pausingGame = Time.timeScale == 1;
+        if (pausingGame) //must pause game
+        {
+            Time.timeScale = 0;
+            _pauseScrn.SetActive(true);
+            //Change pause icon to resume icon
+            pauseBtnImg.sprite = resumeSprite;
+            //Move btn to center of screen
+            transform.localPosition = Vector3.right*(((RectTransform)transform).rect.width/2);
+            //Set text
+            transform.GetChild(0).gameObject.GetComponent<TMPro.TMP_Text>().text = "Resume";
+        }
+        else //unpause game
+        {
+            Time.timeScale = 1;
+            _pauseScrn.SetActive(false);
+            //Change resume icon to pause icon
+            pauseBtnImg.sprite = pauseSprite;
+            //Move btn to bottom right position
+            transform.localPosition = new Vector3(390, -215, 0);
+            //Set text
+            transform.GetChild(0).gameObject.GetComponent<TMPro.TMP_Text>().text = "";
+        }
     }
 }
