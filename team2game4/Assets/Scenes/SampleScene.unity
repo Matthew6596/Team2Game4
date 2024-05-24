@@ -3554,7 +3554,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -4, y: 2}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &444939675
@@ -3604,8 +3604,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16
-  m_fontSizeBase: 16
+  m_fontSize: 14
+  m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -10622,8 +10622,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: a2c6af9b9844f8a499805d1686091efa, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -10656,8 +10656,8 @@ MonoBehaviour:
   btnClickSfx: {fileID: 0}
   creditsPanel: {fileID: 0}
   creditsStartLocation: {fileID: 0}
-  pauseSprite: {fileID: 21300000, guid: 3c9c8cb4b15e2cd4a9df6c070d0db076, type: 3}
-  resumeSprite: {fileID: 21300000, guid: c1323404473d7aa4ca48cad371d5eb97, type: 3}
+  pauseSprite: {fileID: 21300000, guid: a2c6af9b9844f8a499805d1686091efa, type: 3}
+  resumeSprite: {fileID: 21300000, guid: 06ad9f99196d03c4582412a4d9bd9430, type: 3}
 --- !u!114 &1500258254
 MonoBehaviour:
   m_ObjectHideFlags: 0
