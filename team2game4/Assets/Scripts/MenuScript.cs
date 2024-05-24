@@ -102,4 +102,13 @@ public class MenuScript : MonoBehaviour
     {
         creditsOn = on;
     }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+    }
+    public void UnpauseGame()
+    {
+        Time.timeScale = 1;
+    }
 }
