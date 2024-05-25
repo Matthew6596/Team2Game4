@@ -116,10 +116,11 @@ public class MenuScript : MonoBehaviour
             _pauseScrn.SetActive(true);
             //Change pause icon to resume icon
             pauseBtnImg.sprite = resumeSprite;
+            transform.GetChild(0).gameObject.GetComponent<Image>().sprite = resumeSprite;
             //Move btn to center of screen
             transform.localPosition = Vector3.right*(((RectTransform)transform).rect.width/2);
             //Set text
-            transform.GetChild(0).gameObject.GetComponent<TMPro.TMP_Text>().text = "Resume";
+            transform.GetChild(1).gameObject.GetComponent<TMPro.TMP_Text>().text = "Resume";
         }
         else //unpause game
         {
@@ -127,10 +128,11 @@ public class MenuScript : MonoBehaviour
             _pauseScrn.SetActive(false);
             //Change resume icon to pause icon
             pauseBtnImg.sprite = pauseSprite;
+            transform.GetChild(0).gameObject.GetComponent<Image>().sprite = pauseSprite;
             //Move btn to bottom right position
             transform.localPosition = new Vector3(390, -215, 0);
             //Set text
-            transform.GetChild(0).gameObject.GetComponent<TMPro.TMP_Text>().text = "";
+            transform.GetChild(1).gameObject.GetComponent<TMPro.TMP_Text>().text = "";
         }
     }
 }
