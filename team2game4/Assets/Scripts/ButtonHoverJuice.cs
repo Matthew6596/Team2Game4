@@ -23,8 +23,6 @@ public class ButtonHoverJuice : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bool paused=false;
-
         //Scale tweening
         transform.localScale = Tween.LazyTween(transform.localScale, (hovered) ? growScale : defaultScale, tweenRate);
 
