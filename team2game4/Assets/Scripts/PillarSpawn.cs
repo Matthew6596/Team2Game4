@@ -204,9 +204,18 @@ public class PillarSpawn : MonoBehaviour
                     //Vector3 pos = new Vector3(p.transform.position.x - 5, c.transform.position.y, c.transform.position.z);
                     //Instantiate(gm.foodVFX, pos, gm.mainSlime.transform.rotation);
                     //make particle here maybe
-                    Destroy(c);
+
+                    StartCoroutine(WaitToDestroy(c));
+                    //Destroy(c);
                 }
             }
+    }
+
+    //NEW
+    IEnumerator WaitToDestroy(GameObject c)
+    {
+        yield return new WaitForSeconds(player.GetComponent<PlayerMovement>().duration); //Wait for player to stop moving
+        Destroy(c);
     }
 
 }
