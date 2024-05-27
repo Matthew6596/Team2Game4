@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -19,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     Image flashImgRenderer;
 
     //New vars
-    bool isMoving = false;
+    public bool isMoving = false;
     public float duration = 1.0f;
 
     Vector3 targetPos; //made this global
@@ -73,10 +74,6 @@ public class PlayerMovement : MonoBehaviour
                 targetPos =  new Vector3(gameObject.transform.position.x - 1, gm.nextPillar.transform.position.y, 0);
                 StartCoroutine(MoveToTargetPos(startPos, targetPos, isSafe));
                 //gameObject.transform.position = targetPos;
-                src.PlayOneShot(splatSfx);
-
-                Vector3 pos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
-                Instantiate(gm.deathVFX, pos, gm.deathVFX.transform.rotation);
 
                 dead = true;
                 StartCoroutine("GameOver");
@@ -86,13 +83,23 @@ public class PlayerMovement : MonoBehaviour
             {
                 Debug.Log("safezone");
                 isSafe = true;
-                src.PlayOneShot(foodGetSfx);
                 targetPos = new Vector3(gameObject.transform.position.x, gm.nextOpening.transform.position.y, gm.nextOpening.transform.position.z);
                 StartCoroutine(MoveToTargetPos(startPos, targetPos, isSafe));
                 //gameObject.transform.position = targetPos;
             }
 
             PillarSpawn.instance.MovePillars();
+
+            //Play sound after jump
+            if(dead && !PillarSpawn.instance.pillarMoving)
+            {
+                
+            }
+            else if (!PillarSpawn.instance.pillarMoving)
+            {
+                
+            }
+
         }
     }
 
@@ -127,6 +134,7 @@ public class PlayerMovement : MonoBehaviour
 
         if(isSafeT) //Food collect feedback
         {
+            src.PlayOneShot(foodGetSfx);
             PlayerSqaushStretch.Instance.FoodCollect();
 
             Vector3 particlePos = new Vector3(gameObject.transform.position.x + 0.5f, gameObject.transform.position.y, gameObject.transform.position.z);
@@ -142,6 +150,14 @@ public class PlayerMovement : MonoBehaviour
         }
         else //Pillar hit feedback
         {
+            flashImgRenderer.color = new Color(255, 255, 255, 1);
+
+            Vector3 pos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
+            Instantiate(gm.deathVFX, pos, gm.deathVFX.transform.rotation);
+
+            src.PlayOneShot(splatSfx);
+            src.PlayOneShot(deathSFX, 3.5f); //play deathSFX now so it's in sync
+
             //Function is Empty right now, you don't have to use this if you don't want
             PlayerSqaushStretch.Instance.PillarHit();
 
@@ -153,9 +169,15 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator GameOver()
     {
+        if(gm.stomachMeter <= 0)
+        {
+            src.PlayOneShot(deathSFX, 3.5f);
+            flashImgRenderer.color = new Color(255, 255, 255, 1);
+        }
+
         HungerScript.instance.depleteActive = false;
-        src.PlayOneShot(deathSFX, 3.5f);
-        flashImgRenderer.color = new Color(255, 255, 255, 1);
+        //src.PlayOneShot(deathSFX, 3.5f);
+        //flashImgRenderer.color = new Color(255, 255, 255, 1);
 
         inp.enabled = false;
         gm.prevTime = TimeTracker.instance.time; //don't set best time, didn't win
