@@ -23,11 +23,13 @@ public class EnemyAi : MonoBehaviour
     public enum WalkType { Patroll ,ToOrigin }
     private WalkType walkType;
 
+    GameManager gm;
     void Start()
     {
         originPos = transform.position;
         faceMaterial = SmileBody.GetComponent<Renderer>().materials[1];
         walkType = WalkType.Patroll;
+        gm = GameManager.gm;
     }
     public void WalkToNextDestination()
     {
@@ -44,7 +46,7 @@ public class EnemyAi : MonoBehaviour
     }
     void Update()
     {
-        
+        animator.SetFloat("pillarSpacing", gm.pillarSpacing);
 
         switch (currentState)
         {
@@ -107,7 +109,7 @@ public class EnemyAi : MonoBehaviour
 
             case SlimeAnimationState.Jump:
 
-                if (animator.GetCurrentAnimatorStateInfo(0).IsName("Jump")) return;
+                if (animator.GetCurrentAnimatorStateInfo(0).IsName("Jump") || animator.GetCurrentAnimatorStateInfo(0).IsName("EvilJump")) return;
 
                 if (agent.isActiveAndEnabled == true)
                     StopAgent();

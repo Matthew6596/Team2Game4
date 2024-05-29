@@ -71,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 Debug.Log("pillarzone");
                 isSafe = false;
-                targetPos =  new Vector3(gameObject.transform.position.x - 1, gm.nextPillar.transform.position.y, 0);
+                targetPos =  new Vector3(gameObject.transform.position.x - 0.75f, gm.nextPillar.transform.position.y, 0);
                 StartCoroutine(MoveToTargetPos(startPos, targetPos, isSafe));
                 //gameObject.transform.position = targetPos;
 
