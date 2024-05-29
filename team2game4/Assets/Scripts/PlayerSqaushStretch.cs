@@ -45,6 +45,7 @@ public class PlayerSqaushStretch : MonoBehaviour
     //Pillar Hit
     public void PillarHit()
     {
-
+        //Squash
+        TweenTo(new Vector3(1, 1, 0.5f), 0.05f);
     }
 }
