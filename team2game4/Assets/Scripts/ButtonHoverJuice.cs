@@ -6,13 +6,17 @@ using UnityEngine;
 public class ButtonHoverJuice : MonoBehaviour
 {
     public Vector3 growScale;
+    public Vector3 btnDownScale;
     Vector3 defaultScale;
     bool hovered = false;
+    bool btnDown = false;
 
     public float tweenRate;
 
     public float wobbleSpeed;
     public float wobbleAmount;
+
+    public bool isMenu = false;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +28,10 @@ public class ButtonHoverJuice : MonoBehaviour
     void Update()
     {
         //Scale tweening
-        transform.localScale = Tween.LazyTween(transform.localScale, (hovered) ? growScale : defaultScale, tweenRate);
+        if(!btnDown)
+            transform.localScale = Tween.LazyTween(transform.localScale, (hovered) ? growScale : defaultScale, tweenRate);
+        else
+            transform.localScale = Tween.LazyTween(transform.localScale, btnDownScale, tweenRate);
 
         //Wobble
         if (hovered)
@@ -44,6 +51,14 @@ public class ButtonHoverJuice : MonoBehaviour
         //Shrink button to normal size
         hovered = false;
         transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
+    }
+    public void ButtonDown()
+    {
+        btnDown = true;
+    }
+    public void ButtonUp()
+    {
+        btnDown = false;
     }
 }
 
