@@ -59,6 +59,12 @@ public class PillarSpawn : MonoBehaviour
             Pillars[i].transform.position = transform.position + ((numInitPillars-i) * horizontalSpacing * Vector3.left);
         }
         player.transform.position = transform.position + ((numInitPillars+1) * horizontalSpacing * Vector3.left);
+        while (player.transform.position.x < -.5)
+        {
+            player.transform.position += Vector3.right;
+            for(int i=0; i<numInitPillars; i++) Pillars[i].transform.position += Vector3.right;
+            gameObject.transform.position += Vector3.right;
+        }
     }
 
     public void SpawnNewPillar()
