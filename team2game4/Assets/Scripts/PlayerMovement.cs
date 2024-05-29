@@ -19,6 +19,8 @@ public class PlayerMovement : MonoBehaviour
     public GameObject flashImgObj;
     Image flashImgRenderer;
 
+    public Button pausebtn;
+
     //New vars
     public bool isMoving = false;
     public float duration = 1.0f;
@@ -45,6 +47,7 @@ public class PlayerMovement : MonoBehaviour
         {
             dead = true;
             gm.stomachMeter = 0;
+            pausebtn.interactable = false;
             StartCoroutine("GameOver");
         }
 
