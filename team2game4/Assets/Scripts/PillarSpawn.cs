@@ -224,4 +224,29 @@ public class PillarSpawn : MonoBehaviour
         Destroy(c);
     }
 
+    //NEW
+    public void DecreaseGapSize(int gapSizeDecrease)
+    {
+        if(gapSizeDecrease >= 1)
+        {
+            int min;
+            switch(gm.minPillarGap)
+            {
+                case 1:
+                case 2:
+                    min = 1; break; //evil
+                case 3:
+                case 4:
+                    min = 2; break; //standard
+                case 5:
+                default:
+                    min = 3; break; //easy
+            }
+
+            if (minGapSize > min)
+                minGapSize -= gapSizeDecrease;
+            else if(maxGapSize > minGapSize)
+                maxGapSize -= gapSizeDecrease;
+        }
+    }
 }

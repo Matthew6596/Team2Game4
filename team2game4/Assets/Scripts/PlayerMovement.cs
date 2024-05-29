@@ -147,6 +147,7 @@ public class PlayerMovement : MonoBehaviour
             }
 
             TargetScript.instance.IncreaseTurnSpeed(1); //Every time player jumps, aim line turn speed increases
+            PillarSpawn.instance.DecreaseGapSize(1); //Every time player jumps, gap size decreases
         }
         else //Pillar hit feedback
         {
