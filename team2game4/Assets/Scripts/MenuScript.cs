@@ -15,6 +15,8 @@ public class MenuScript : MonoBehaviour
     Vector3 creditsEndLocation;
     bool creditsOn = false;
 
+    public static bool muteClick = false;
+
     Image pauseBtnImg;
     public Sprite pauseSprite,resumeSprite;
 
@@ -42,7 +44,7 @@ public class MenuScript : MonoBehaviour
 
     public void MouseLeftClick(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed)
+        if (ctx.performed && !muteClick)
         {
             src.PlayOneShot(btnClickSfx,1f);
         }

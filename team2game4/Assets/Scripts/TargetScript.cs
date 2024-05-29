@@ -66,7 +66,7 @@ public class TargetScript : MonoBehaviour
     public void IncreaseTurnSpeed(float turnSpeedIncrease)
     {
         if (aimSpeedSlower) turnSpeedIncrease *= 1 - aim.safeZoneSlowDown;
-        turnSpeedIncrease *= (aim.turnSpeed > 0) ? 1 : -1;
+        turnSpeedIncrease *= (aim.turnSpeed > 0) ? 2 : -2;
         aim.turnSpeed += turnSpeedIncrease;
     }
 }

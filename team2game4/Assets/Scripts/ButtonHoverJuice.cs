@@ -6,25 +6,34 @@ using UnityEngine;
 public class ButtonHoverJuice : MonoBehaviour
 {
     public Vector3 growScale;
+    public Vector3 btnDownScale;
     Vector3 defaultScale;
     bool hovered = false;
+    bool btnDown = false;
 
     public float tweenRate;
 
     public float wobbleSpeed;
     public float wobbleAmount;
 
+    public AudioClip downSfx, upSfx;
+    AudioSource src;
+
     // Start is called before the first frame update
     void Start()
     {
         defaultScale = transform.localScale;
+        if(downSfx!=null||upSfx!=null) src = gameObject.AddComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
         //Scale tweening
-        transform.localScale = Tween.LazyTween(transform.localScale, (hovered) ? growScale : defaultScale, tweenRate);
+        if(!btnDown)
+            transform.localScale = Tween.LazyTween(transform.localScale, (hovered) ? growScale : defaultScale, tweenRate);
+        else
+            transform.localScale = Tween.LazyTween(transform.localScale, btnDownScale, tweenRate);
 
         //Wobble
         if (hovered)
@@ -37,13 +46,33 @@ public class ButtonHoverJuice : MonoBehaviour
     public void ButtonHover()
     {
         //Grow btn
+        if (downSfx != null) MenuScript.muteClick = true;
         hovered = true;
     }
     public void ButtonNotHover()
     {
         //Shrink button to normal size
+        if(downSfx!=null) MenuScript.muteClick = false;
         hovered = false;
         transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
+    }
+    public void ButtonDown()
+    {
+        if (!btnDown)
+        {
+            btnDown = true;
+            if (downSfx != null)
+                src.PlayOneShot(downSfx);
+        }
+    }
+    public void ButtonUp()
+    {
+        if (btnDown)
+        {
+            btnDown = false;
+            if(upSfx!=null)
+                src.PlayOneShot(upSfx);
+        }
     }
 }
 
