@@ -10,6 +10,8 @@ public class TargetScript : MonoBehaviour
     GameManager gm;
     AimingScript aim;
 
+    public bool aimSpeedSlower=false;
+
     Transform reticle;
     // Start is called before the first frame update
     void Start()
@@ -42,6 +44,7 @@ public class TargetScript : MonoBehaviour
             if (prevCollide == "SafeZone")
             {
                 aim.turnSpeed /= 1-aim.safeZoneSlowDown;
+                aimSpeedSlower = true;
             }
         }
         else if (other.gameObject.CompareTag("SafeZone"))
@@ -53,9 +56,17 @@ public class TargetScript : MonoBehaviour
             if (prevCollide == "Pillar")
             {
                 aim.turnSpeed *= 1-aim.safeZoneSlowDown;
+                aimSpeedSlower = false;
             }
         }
 
         prevCollide = other.gameObject.tag;
+    }
+
+    public void IncreaseTurnSpeed(float turnSpeedIncrease)
+    {
+        if (aimSpeedSlower) turnSpeedIncrease *= 1 - aim.safeZoneSlowDown;
+        turnSpeedIncrease *= (aim.turnSpeed > 0) ? 2 : -2;
+        aim.turnSpeed += turnSpeedIncrease;
     }
 }

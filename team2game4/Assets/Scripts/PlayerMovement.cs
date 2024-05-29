@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -19,10 +20,12 @@ public class PlayerMovement : MonoBehaviour
     Image flashImgRenderer;
 
     //New vars
-    bool isMoving = false;
+    public bool isMoving = false;
     public float duration = 1.0f;
 
     Vector3 targetPos; //made this global
+
+    bool isFirstJump = true;
 
     // Start is called before the first frame update
     void Start()
@@ -68,13 +71,9 @@ public class PlayerMovement : MonoBehaviour
             {
                 Debug.Log("pillarzone");
                 isSafe = false;
-                targetPos =  new Vector3(gameObject.transform.position.x - 1, gm.nextPillar.transform.position.y, 0);
+                targetPos =  new Vector3(gameObject.transform.position.x - 0.75f, gm.nextPillar.transform.position.y, 0);
                 StartCoroutine(MoveToTargetPos(startPos, targetPos, isSafe));
                 //gameObject.transform.position = targetPos;
-                src.PlayOneShot(splatSfx);
-
-                Vector3 pos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
-                Instantiate(gm.deathVFX, pos, gm.deathVFX.transform.rotation);
 
                 dead = true;
                 StartCoroutine("GameOver");
@@ -84,13 +83,23 @@ public class PlayerMovement : MonoBehaviour
             {
                 Debug.Log("safezone");
                 isSafe = true;
-                src.PlayOneShot(foodGetSfx);
                 targetPos = new Vector3(gameObject.transform.position.x, gm.nextOpening.transform.position.y, gm.nextOpening.transform.position.z);
                 StartCoroutine(MoveToTargetPos(startPos, targetPos, isSafe));
                 //gameObject.transform.position = targetPos;
             }
 
             PillarSpawn.instance.MovePillars();
+
+            //Play sound after jump
+            if(dead && !PillarSpawn.instance.pillarMoving)
+            {
+                
+            }
+            else if (!PillarSpawn.instance.pillarMoving)
+            {
+                
+            }
+
         }
     }
 
@@ -123,18 +132,53 @@ public class PlayerMovement : MonoBehaviour
 
         isMoving = false;
 
-        if(isSafeT)
+        if(isSafeT) //Food collect feedback
         {
+            src.PlayOneShot(foodGetSfx);
+            PlayerSqaushStretch.Instance.FoodCollect();
+
             Vector3 particlePos = new Vector3(gameObject.transform.position.x + 0.5f, gameObject.transform.position.y, gameObject.transform.position.z);
             Instantiate(gm.foodVFX, particlePos, gm.mainSlime.transform.rotation);
+
+            //Remember what the turn speed was on first jump, before increasing it
+            if (isFirstJump) {
+                AimingScript.instance.initialTurnSpeed = AimingScript.instance.turnSpeed;
+                isFirstJump = false;
+            }
+
+            TargetScript.instance.IncreaseTurnSpeed(1); //Every time player jumps, aim line turn speed increases
+            PillarSpawn.instance.DecreaseGapSize(1); //Every time player jumps, gap size decreases
+        }
+        else //Pillar hit feedback
+        {
+            flashImgRenderer.color = new Color(255, 255, 255, 1);
+
+            Vector3 pos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
+            Instantiate(gm.deathVFX, pos, gm.deathVFX.transform.rotation);
+
+            src.PlayOneShot(splatSfx);
+            src.PlayOneShot(deathSFX, 3.5f); //play deathSFX now so it's in sync
+
+            //Function is Empty right now, you don't have to use this if you don't want
+            PlayerSqaushStretch.Instance.PillarHit();
+
+            //Reset turn speed when player die
+            AimingScript.instance.turnSpeed = AimingScript.instance.initialTurnSpeed;
+            isFirstJump = true;
         }
     }
 
     IEnumerator GameOver()
     {
+        if(gm.stomachMeter <= 0)
+        {
+            src.PlayOneShot(deathSFX, 3.5f);
+            flashImgRenderer.color = new Color(255, 255, 255, 1);
+        }
+
         HungerScript.instance.depleteActive = false;
-        src.PlayOneShot(deathSFX, 3.5f);
-        flashImgRenderer.color = new Color(255, 255, 255, 1);
+        //src.PlayOneShot(deathSFX, 3.5f);
+        //flashImgRenderer.color = new Color(255, 255, 255, 1);
 
         inp.enabled = false;
         gm.prevTime = TimeTracker.instance.time; //don't set best time, didn't win
@@ -150,7 +194,7 @@ public class PlayerMovement : MonoBehaviour
 
         inp.enabled = false; won = true;
         gm.prevTime = TimeTracker.instance.time;
-        if (gm.prevTime < gm.bestSessionTime) gm.bestSessionTime = gm.prevTime; //Smaller/Faster time is better
+        if (gm.prevTime < gm.bestSessionTime) gm.SetBestTime(); //Smaller/Faster time is better
 
         yield return new WaitForSeconds(2);
         MenuScript.changeScene("WinScene");
@@ -159,7 +203,7 @@ public class PlayerMovement : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        if(other.gameObject.CompareTag("Pillar"))
+        /*if(other.gameObject.CompareTag("Pillar"))
         {
             Vector3 pos = gameObject.transform.position;
             if (gameObject.transform.position.y > targetPos.y)
@@ -175,7 +219,7 @@ public class PlayerMovement : MonoBehaviour
                 //pos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1, gameObject.transform.position.z);
             }
 
-        }
+        }*/
     }
 
 }

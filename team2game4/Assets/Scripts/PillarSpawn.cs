@@ -59,6 +59,12 @@ public class PillarSpawn : MonoBehaviour
             Pillars[i].transform.position = transform.position + ((numInitPillars-i) * horizontalSpacing * Vector3.left);
         }
         player.transform.position = transform.position + ((numInitPillars+1) * horizontalSpacing * Vector3.left);
+        while (player.transform.position.x < -.5)
+        {
+            player.transform.position += Vector3.right;
+            for(int i=0; i<numInitPillars; i++) Pillars[i].transform.position += Vector3.right;
+            gameObject.transform.position += Vector3.right;
+        }
     }
 
     public void SpawnNewPillar()
@@ -204,9 +210,43 @@ public class PillarSpawn : MonoBehaviour
                     //Vector3 pos = new Vector3(p.transform.position.x - 5, c.transform.position.y, c.transform.position.z);
                     //Instantiate(gm.foodVFX, pos, gm.mainSlime.transform.rotation);
                     //make particle here maybe
-                    Destroy(c);
+
+                    StartCoroutine(WaitToDestroy(c));
+                    //Destroy(c);
                 }
             }
     }
 
+    //NEW
+    IEnumerator WaitToDestroy(GameObject c)
+    {
+        yield return new WaitForSeconds(player.GetComponent<PlayerMovement>().duration); //Wait for player to stop moving
+        Destroy(c);
+    }
+
+    //NEW
+    public void DecreaseGapSize(int gapSizeDecrease)
+    {
+        if(gapSizeDecrease >= 1)
+        {
+            int min;
+            switch(gm.minPillarGap)
+            {
+                case 1:
+                case 2:
+                    min = 1; break; //evil
+                case 3:
+                case 4:
+                    min = 2; break; //standard
+                case 5:
+                default:
+                    min = 3; break; //easy
+            }
+
+            if (minGapSize > min)
+                minGapSize -= gapSizeDecrease;
+            else if(maxGapSize > minGapSize)
+                maxGapSize -= gapSizeDecrease;
+        }
+    }
 }

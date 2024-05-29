@@ -42,6 +42,8 @@ public class ScreenTransition : MonoBehaviour
     }
     IEnumerator changeScene(string sceneName, float t, float tt)
     {
+        Time.timeScale = 1;
+
         tween1 = true;
         yield return new WaitForSeconds(t);
         tween2 = true;
