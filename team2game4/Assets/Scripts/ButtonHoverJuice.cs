@@ -19,28 +19,33 @@ public class ButtonHoverJuice : MonoBehaviour
     public AudioClip downSfx, upSfx;
     AudioSource src;
 
+    public float startDelay = 0;
+    bool started = false;
+
     // Start is called before the first frame update
     void Start()
     {
-        defaultScale = transform.localScale;
         if(downSfx!=null||upSfx!=null) src = gameObject.AddComponent<AudioSource>();
+        StartCoroutine(delayAtStart());
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Scale tweening
-        if(!btnDown)
-            transform.localScale = Tween.LazyTween(transform.localScale, (hovered) ? growScale : defaultScale, tweenRate);
-        else
-            transform.localScale = Tween.LazyTween(transform.localScale, btnDownScale, tweenRate);
-
-        //Wobble
-        if (hovered)
+        if (started)
         {
-            transform.localRotation = Tween.Wobble(wobbleSpeed, wobbleAmount);
+            //Scale tweening
+            if (!btnDown)
+                transform.localScale = Tween.LazyTween(transform.localScale, (hovered) ? growScale : defaultScale, tweenRate);
+            else
+                transform.localScale = Tween.LazyTween(transform.localScale, btnDownScale, tweenRate);
+
+            //Wobble
+            if (hovered)
+            {
+                transform.localRotation = Tween.Wobble(wobbleSpeed, wobbleAmount);
+            }
         }
-        
     }
     
     public void ButtonHover()
@@ -73,6 +78,13 @@ public class ButtonHoverJuice : MonoBehaviour
             if(upSfx!=null)
                 src.PlayOneShot(upSfx);
         }
+    }
+
+    IEnumerator delayAtStart()
+    {
+        yield return new WaitForSeconds(startDelay);
+        defaultScale = transform.localScale;
+        started = true;
     }
 }
 

@@ -1018,6 +1018,7 @@ MonoBehaviour:
   startDelay: 0.5
   tweenRate: 0.075
   startTransform: {fileID: 1363826790}
+  stopAfterTime: 1
 --- !u!114 &289502185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1037,6 +1038,7 @@ MonoBehaviour:
   wobbleAmount: 0
   downSfx: {fileID: 8300000, guid: 23e002ad2c0d0f04bb17a09e7fc019b6, type: 3}
   upSfx: {fileID: 8300000, guid: 923863a6c15cc844b9d96b80b82cc65c, type: 3}
+  startDelay: 1
 --- !u!114 &289502186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1519,6 +1521,7 @@ MonoBehaviour:
   wobbleAmount: 2
   downSfx: {fileID: 0}
   upSfx: {fileID: 0}
+  startDelay: 0
 --- !u!1 &400748793
 GameObject:
   m_ObjectHideFlags: 0
@@ -2738,6 +2741,7 @@ MonoBehaviour:
   wobbleAmount: 4
   downSfx: {fileID: 0}
   upSfx: {fileID: 0}
+  startDelay: 0
 --- !u!1 &572114959
 GameObject:
   m_ObjectHideFlags: 0
@@ -2950,6 +2954,7 @@ MonoBehaviour:
   wobbleAmount: 4
   downSfx: {fileID: 0}
   upSfx: {fileID: 0}
+  startDelay: 0
 --- !u!43 &619997954
 Mesh:
   m_ObjectHideFlags: 0
@@ -3819,6 +3824,7 @@ MonoBehaviour:
   wobbleAmount: 2
   downSfx: {fileID: 0}
   upSfx: {fileID: 0}
+  startDelay: 0
 --- !u!114 &758347473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4236,6 +4242,7 @@ MonoBehaviour:
   startDelay: 0.5
   tweenRate: 0.075
   startTransform: {fileID: 1262382118}
+  stopAfterTime: 0
 --- !u!1001 &875718137
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5326,6 +5333,7 @@ MonoBehaviour:
   wobbleAmount: 4
   downSfx: {fileID: 0}
   upSfx: {fileID: 0}
+  startDelay: 0
 --- !u!1001 &1054209293
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5788,6 +5796,7 @@ MonoBehaviour:
   wobbleAmount: 2
   downSfx: {fileID: 0}
   upSfx: {fileID: 0}
+  startDelay: 0
 --- !u!1 &1165477417
 GameObject:
   m_ObjectHideFlags: 0
@@ -6147,6 +6156,7 @@ MonoBehaviour:
   wobbleAmount: 2
   downSfx: {fileID: 0}
   upSfx: {fileID: 0}
+  startDelay: 0
 --- !u!1 &1213377280
 GameObject:
   m_ObjectHideFlags: 0
@@ -6241,6 +6251,7 @@ MonoBehaviour:
   startDelay: 0.5
   tweenRate: 0.075
   startTransform: {fileID: 874514633}
+  stopAfterTime: 0
 --- !u!1 &1262382117
 GameObject:
   m_ObjectHideFlags: 0
@@ -6725,6 +6736,7 @@ MonoBehaviour:
   wobbleAmount: 2
   downSfx: {fileID: 0}
   upSfx: {fileID: 0}
+  startDelay: 0
 --- !u!1 &1437429307
 GameObject:
   m_ObjectHideFlags: 0
@@ -6817,6 +6829,7 @@ MonoBehaviour:
   startDelay: 0.5
   tweenRate: 0.075
   startTransform: {fileID: 414205038}
+  stopAfterTime: 0
 --- !u!1 &1456278347 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7099655024501674456, guid: 8760cc9eb30a2b340b14499b6e150dc4, type: 3}
@@ -7489,6 +7502,7 @@ MonoBehaviour:
   wobbleAmount: 4
   downSfx: {fileID: 0}
   upSfx: {fileID: 0}
+  startDelay: 0
 --- !u!1 &1562071386
 GameObject:
   m_ObjectHideFlags: 0
@@ -8459,6 +8473,7 @@ MonoBehaviour:
   wobbleAmount: 2
   downSfx: {fileID: 0}
   upSfx: {fileID: 0}
+  startDelay: 0
 --- !u!1 &1869293686
 GameObject:
   m_ObjectHideFlags: 0
