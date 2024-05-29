@@ -16,12 +16,14 @@ public class ButtonHoverJuice : MonoBehaviour
     public float wobbleSpeed;
     public float wobbleAmount;
 
-    public bool isMenu = false;
+    public AudioClip downSfx, upSfx;
+    AudioSource src;
 
     // Start is called before the first frame update
     void Start()
     {
         defaultScale = transform.localScale;
+        if(downSfx!=null||upSfx!=null) src = gameObject.AddComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -54,11 +56,19 @@ public class ButtonHoverJuice : MonoBehaviour
     }
     public void ButtonDown()
     {
-        btnDown = true;
+        if (!btnDown)
+        {
+            btnDown = true;
+            src.PlayOneShot(downSfx);
+        }
     }
     public void ButtonUp()
     {
-        btnDown = false;
+        if (btnDown)
+        {
+            btnDown = false;
+            src.PlayOneShot(upSfx);
+        }
     }
 }
 
