@@ -46,11 +46,13 @@ public class ButtonHoverJuice : MonoBehaviour
     public void ButtonHover()
     {
         //Grow btn
+        if (downSfx != null) MenuScript.muteClick = true;
         hovered = true;
     }
     public void ButtonNotHover()
     {
         //Shrink button to normal size
+        if(downSfx!=null) MenuScript.muteClick = false;
         hovered = false;
         transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
     }
@@ -59,7 +61,8 @@ public class ButtonHoverJuice : MonoBehaviour
         if (!btnDown)
         {
             btnDown = true;
-            src.PlayOneShot(downSfx);
+            if (downSfx != null)
+                src.PlayOneShot(downSfx);
         }
     }
     public void ButtonUp()
@@ -67,7 +70,8 @@ public class ButtonHoverJuice : MonoBehaviour
         if (btnDown)
         {
             btnDown = false;
-            src.PlayOneShot(upSfx);
+            if(upSfx!=null)
+                src.PlayOneShot(upSfx);
         }
     }
 }
