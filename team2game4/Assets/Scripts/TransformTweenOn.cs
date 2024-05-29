@@ -11,6 +11,8 @@ public class TransformTweenOn : MonoBehaviour
 
     bool started = false;
 
+    public float stopAfterTime=0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,5 +51,12 @@ public class TransformTweenOn : MonoBehaviour
     {
         yield return new WaitForSeconds(startDelay);
         started = true;
+        if (stopAfterTime != 0) StartCoroutine(stopAfter());
+    }
+
+    IEnumerator stopAfter()
+    {
+        yield return new WaitForSeconds(stopAfterTime);
+        started = false;
     }
 }
